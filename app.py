@@ -9,27 +9,33 @@ app = Flask(__name__)
 app.config.from_object(Config)
 CORS(app, supports_credentials=True)
 
-# Папка с фронтендом (на уровень выше от backend/)
-FRONTEND_DIR = os.path.dirname(__file__)
+# Все файлы лежат в одной папке с app.py
+FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Раздача HTML страниц
 @app.route('/')
+def index():
+    return send_from_directory(FRONTEND_DIR, 'index.html')
+
 @app.route('/<path:filename>')
-def serve_frontend(filename='index.html'):
-    # Если запрос к API — пропускаем
+def serve_frontend(filename):
     if filename.startswith('api/'):
         return "Not found", 404
-    return send_from_directory(FRONTEND_DIR, filename)
+    try:
+        return send_from_directory(FRONTEND_DIR, filename)
+    except:
+        return send_from_directory(FRONTEND_DIR, 'index.html')
 
-# Инициализация базы данных
+# Инициализация БД
 init_db()
- 
+
 # Регистрация маршрутов
 register_routes(app)
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
     print("=" * 50)
     print("  ЭдуПлатформа — Flask сервер запущен!")
-    print("  http://127.0.0.1:5000")
+    print(f"  http://0.0.0.0:{port}")
     print("=" * 50)
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=port, debug=False)
