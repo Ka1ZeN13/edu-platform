@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 CORS(app, supports_credentials=True)
 
-# Все файлы лежат в одной папке с app.py
+# Папка с файлами — там же где app.py
 FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
