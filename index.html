@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ЭдуПлатформа — Педагогические программные средства</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     НАВБАР
+═══════════════════════════════ -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal('login')">Войти</button>
+    <button class="btn-primary" onclick="openModal('login')">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════ -->
+<section class="hero">
+  <span class="hero-badge">🎓 Педагогическое программное средство</span>
+
+  <h1>
+    Платформа, которая<br>
+    <span class="highlight">повышает эффективность</span><br>
+    образовательного процесса
+  </h1>
+
+  <p>
+    Интерактивные курсы, геймификация, автоматические тесты и аналитика —
+    всё для современного дистанционного обучения.
+  </p>
+
+  <div class="hero-actions">
+    <a href="catalog.html" class="btn-hero">📖 Выбрать направление</a>
+    <a href="stages.html" class="btn-hero-outline">🔬 Этапы создания ППС</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">5</div>
+      <div class="label">Курсов</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">3</div>
+      <div class="label">Направления</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">15+</div>
+      <div class="label">Модулей</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">100%</div>
+      <div class="label">Онлайн</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     УМНЫЙ ПОИСК
+═══════════════════════════════ -->
+<div class="search-section">
+  <div class="search-wrap">
+    <div class="search-box">
+      <span style="font-size:1.2rem;">🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Найти дисциплину... например «Python» или «Геймификация»"
+      />
+      <button class="search-btn" onclick="doSearch()">Найти</button>
+    </div>
+    <div class="search-tags">
+      <span class="search-tag-label">Популярное:</span>
+      <span class="tag" onclick="searchTag('Дистанционное обучение')">Дистанционное обучение</span>
+      <span class="tag" onclick="searchTag('Python')">Python</span>
+      <span class="tag" onclick="searchTag('Геймификация')">Геймификация</span>
+      <span class="tag" onclick="searchTag('Кибербезопасность')">Кибербезопасность</span>
+      <span class="tag" onclick="searchTag('ГИС')">ГИС</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     РЕЗУЛЬТАТЫ ПОИСКА (скрыто)
+═══════════════════════════════ -->
+<div id="searchResults" style="display:none;" class="section section-soft">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Результаты поиска</div>
+      <h2 id="searchTitle">Найдено курсов</h2>
+    </div>
+    <div class="courses-grid" id="searchGrid"></div>
+    <div style="margin-top:1.5rem;">
+      <button class="filter-btn" onclick="clearSearch()">✕ Сбросить поиск</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     НАПРАВЛЕНИЯ
+═══════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Каталог</div>
+      <h2>Направления обучения</h2>
+      <p>Выберите подходящее направление и начните учиться прямо сейчас</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:1.5rem;">
+
+      <a href="catalog.html?section=pedagogy" class="course-card" style="text-decoration:none;">
+        <div class="course-card-header" style="background: linear-gradient(135deg,#EEF2FF,#C7D2FE);">
+          🎓
+        </div>
+        <div class="course-card-body">
+          <span class="course-section-badge badge-blue">Педагогика</span>
+          <h3>Дистанционное образование и педагогика</h3>
+          <p>Технологии дистанционного обучения, PBL, геймификация в образовании.</p>
+        </div>
+        <div class="course-card-footer">
+          <span class="course-meta">2 курса</span>
+          <span class="btn-card">Смотреть</span>
+        </div>
+      </a>
+
+      <a href="catalog.html?section=it" class="course-card" style="text-decoration:none;">
+        <div class="course-card-header" style="background: linear-gradient(135deg,#E0F2FE,#BAE6FD);">
+          💻
+        </div>
+        <div class="course-card-body">
+          <span class="course-section-badge badge-cyan">IT</span>
+          <h3>Программирование и IT</h3>
+          <p>Python, Kivy, SQLite, pandas и основы кибербезопасности.</p>
+        </div>
+        <div class="course-card-footer">
+          <span class="course-meta">2 курса</span>
+          <span class="btn-card">Смотреть</span>
+        </div>
+      </a>
+
+      <a href="catalog.html?section=special" class="course-card" style="text-decoration:none;">
+        <div class="course-card-header" style="background: linear-gradient(135deg,#F0FDF4,#BBF7D0);">
+          🌍
+        </div>
+        <div class="course-card-body">
+          <span class="course-section-badge badge-green">Спецдисциплины</span>
+          <h3>Специальные дисциплины</h3>
+          <p>Геоинформационные системы и анализ пространственных данных.</p>
+        </div>
+        <div class="course-card-footer">
+          <span class="course-meta">1 курс</span>
+          <span class="btn-card">Смотреть</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     ПОЧЕМУ МЫ
+═══════════════════════════════ -->
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-header text-center" style="max-width:600px; margin-left:auto; margin-right:auto; margin-bottom:2.5rem;">
+      <div class="section-label">Преимущества</div>
+      <h2>Почему наша платформа эффективна?</h2>
+      <p>Каждый элемент платформы основан на принципах современной педагогики</p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(79,70,229,0.1);">🧩</div>
+        <h3>Проблемно-ориентированное обучение</h3>
+        <p>Студенты решают реальные задачи, а не просто читают теорию. Метод PBL повышает вовлечённость и запоминаемость.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(245,158,11,0.1);">🏆</div>
+        <h3>Геймификация и рейтинги</h3>
+        <p>Баллы, бейджи, лидерборд и уровни мотивируют студентов учиться активнее и доводить курсы до конца.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(16,185,129,0.1);">✅</div>
+        <h3>Автоматические тесты</h3>
+        <p>Интерактивные тесты через LearningApps с мгновенной проверкой экономят время преподавателя и дают студенту обратную связь.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(6,182,212,0.1);">📊</div>
+        <h3>Аналитика и мониторинг</h3>
+        <p>Преподаватель видит прогресс каждого студента, посещаемость и результаты тестов в реальном времени.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     ЭТАПЫ ППС (ПРЕВЬЮ)
+═══════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Тема проекта</div>
+      <h2>Этапы создания педагогического программного средства</h2>
+      <p>Наша платформа — практическая реализация всех этапов создания ППС</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin-bottom:2rem;">
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem; text-align:center; box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:0.7rem;">🔍</div>
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.3rem; color:var(--primary);">1. Анализ</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Определение целей и аудитории</div>
+      </div>
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem; text-align:center; box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:0.7rem;">📐</div>
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.3rem; color:var(--primary);">2. Проектирование</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Структура и архитектура курса</div>
+      </div>
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem; text-align:center; box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:0.7rem;">🛠</div>
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.3rem; color:var(--primary);">3. Разработка</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Создание контента и кода</div>
+      </div>
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem; text-align:center; box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:0.7rem;">🧪</div>
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.3rem; color:var(--primary);">4. Тестирование</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Проверка и отладка</div>
+      </div>
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem; text-align:center; box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:0.7rem;">🚀</div>
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.3rem; color:var(--primary);">5. Внедрение</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary);">Запуск и оценка результатов</div>
+      </div>
+    </div>
+
+    <a href="stages.html" class="btn-hero-outline" style="display:inline-flex;">Подробнее об этапах →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     CTA
+═══════════════════════════════ -->
+<section class="section" style="background: linear-gradient(135deg, #4F46E5, #06B6D4); text-align:center;">
+  <div class="container">
+    <h2 style="color:white; font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:0.8rem;">Готов начать обучение?</h2>
+    <p style="color:rgba(255,255,255,0.8); margin-bottom:2rem; font-size:1rem;">Войди по номеру телефона и получи доступ ко всем курсам</p>
+    <button class="btn-hero" style="background:white; color:var(--primary); box-shadow:0 8px 25px rgba(0,0,0,0.15);" onclick="openModal('login')">
+      📱 Войти по номеру телефона
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     ФУТЕР
+═══════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem; line-height:1.6; max-width:280px;">
+        Педагогическое программное средство для повышения эффективности образовательного процесса.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+      <a href="teacher.html">Преподавателям</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+    <span>Педагогические программные средства</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════
+     МОДАЛЬНОЕ ОКНО ВХОДА
+═══════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+
+    <!-- ШАГ 1: Ввод телефона -->
+    <div id="stepPhone">
+      <h2>👋 Добро пожаловать!</h2>
+      <p>Введите номер телефона для входа или регистрации</p>
+
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+      <p style="font-size:0.78rem; color:var(--text-muted); text-align:center; margin-top:1rem;">
+        Мы отправим 4-значный код подтверждения
+      </p>
+    </div>
+
+    <!-- ШАГ 2: Ввод OTP -->
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на номер +998 90 *** ** **</p>
+
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <p style="font-size:0.78rem; color:var(--text-muted); text-align:center; margin-top:1rem;">
+        Не получили? <a href="#" style="color:var(--primary); font-weight:700;" onclick="resendOTP()">Отправить снова</a>
+      </p>
+      <button onclick="backToPhone()" style="width:100%; margin-top:0.5rem; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">← Изменить номер</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

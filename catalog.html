@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог курсов — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html" class="active">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+    <button class="btn-primary" onclick="openModal()">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- ШАПКА КАТАЛОГА -->
+<section style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE); padding:3rem 2rem; border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-label">Все направления</div>
+    <h1 style="font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:0.5rem;">Каталог дисциплин</h1>
+    <p style="color:var(--text-secondary); font-size:1rem;">5 курсов · 3 направления · Интерактивные тесты после каждого модуля</p>
+  </div>
+</section>
+
+<!-- ПОИСК + ФИЛЬТРЫ -->
+<section style="background:white; padding:1.5rem 2rem; border-bottom:1px solid var(--border); position:sticky; top:68px; z-index:50; box-shadow:var(--shadow-sm);">
+  <div class="container">
+    <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+
+      <!-- Поиск -->
+      <div class="search-box" style="flex:1; min-width:220px;">
+        <span style="font-size:1.1rem;">🔍</span>
+        <input type="text" id="catalogSearch" placeholder="Поиск по курсам..." oninput="filterAll()" />
+      </div>
+
+      <!-- Фильтры -->
+      <div class="catalog-filters" style="margin:0;">
+        <button class="filter-btn active" onclick="setFilter('all',this)">Все курсы</button>
+        <button class="filter-btn" onclick="setFilter('pedagogy',this)">🎓 Педагогика</button>
+        <button class="filter-btn" onclick="setFilter('it',this)">💻 IT</button>
+        <button class="filter-btn" onclick="setFilter('special',this)">🌍 Спецдисциплины</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- КАТАЛОГ -->
+<section class="section">
+  <div class="container">
+
+    <!-- ═══ РАЗДЕЛ 1: ПЕДАГОГИКА ═══ -->
+    <div class="catalog-section" data-section="pedagogy" id="sec-pedagogy">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid #EEF2FF;">
+        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#4F46E5,#6366F1);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:white;">🎓</div>
+        <div>
+          <div class="section-label" style="margin:0;">Раздел 1</div>
+          <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;">Дистанционное образование и педагогика</h2>
+        </div>
+        <span class="badge-pill badge-blue" style="margin-left:auto;">2 курса</span>
+      </div>
+
+      <div class="courses-grid" id="grid-pedagogy">
+
+        <!-- Курс 1 -->
+        <a href="course.html?id=1" class="course-card course-item" data-section="pedagogy" data-title="технологии дистанционного обучения pbl google classroom" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#EEF2FF,#C7D2FE);">🎓</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-blue">Педагогика</span>
+            <h3>Технологии дистанционного обучения</h3>
+            <p>Принципы PBL, настройка Google Classroom, геймификация и автоматические тесты через LearningApps.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+              <span class="badge-pill badge-blue">PBL</span>
+              <span class="badge-pill badge-blue">Google Classroom</span>
+              <span class="badge-pill badge-blue">Геймификация</span>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">📦 3 модуля · 🎮 3 теста</span>
+            <span class="btn-card">Открыть</span>
+          </div>
+        </a>
+
+        <!-- Курс 2 -->
+        <a href="course.html?id=2" class="course-card course-item" data-section="pedagogy" data-title="педагогическая геймификация alias wordle soya дебаты" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#F5F3FF,#DDD6FE);">🎮</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-blue">Педагогика</span>
+            <h3>Педагогическая геймификация</h3>
+            <p>Интеграция интерактивных форматов: Alias, Wordle, SOYA и дебаты в учебный процесс.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+              <span class="badge-pill badge-blue">Alias</span>
+              <span class="badge-pill badge-blue">Wordle</span>
+              <span class="badge-pill badge-blue">SOYA</span>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">📦 3 модуля · 🎮 3 теста</span>
+            <span class="btn-card">Открыть</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div style="height:2.5rem;"></div>
+
+    <!-- ═══ РАЗДЕЛ 2: IT ═══ -->
+    <div class="catalog-section" data-section="it" id="sec-it">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid #E0F2FE;">
+        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#06B6D4,#0891B2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:white;">💻</div>
+        <div>
+          <div class="section-label" style="margin:0; color:#0891B2;">Раздел 2</div>
+          <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;">Программирование и IT</h2>
+        </div>
+        <span class="badge-pill badge-cyan" style="margin-left:auto;">2 курса</span>
+      </div>
+
+      <div class="courses-grid" id="grid-it">
+
+        <!-- Курс 3 -->
+        <a href="course.html?id=3" class="course-card course-item" data-section="it" data-title="python разработка kivy sqlite pandas программирование" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#E0F2FE,#BAE6FD);">🐍</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-cyan">IT</span>
+            <h3>Python-разработка: Kivy, SQLite, pandas</h3>
+            <p>От фреймворка Kivy до работы с библиотеками SQLite и pandas. Практические проекты на каждом модуле.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+              <span class="badge-pill badge-cyan">Python</span>
+              <span class="badge-pill badge-cyan">Kivy</span>
+              <span class="badge-pill badge-cyan">SQLite</span>
+              <span class="badge-pill badge-cyan">pandas</span>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">📦 4 модуля · 🎮 4 теста</span>
+            <span class="btn-card">Открыть</span>
+          </div>
+        </a>
+
+        <!-- Курс 4 -->
+        <a href="course.html?id=4" class="course-card course-item" data-section="it" data-title="кибербезопасность защита данных безопасность" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#EFF6FF,#BFDBFE);">🔐</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-cyan">IT</span>
+            <h3>Основы кибербезопасности и защита данных</h3>
+            <p>Моделирование угроз, защита данных и практика с тайными ролями по механике SOYA.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+              <span class="badge-pill badge-cyan">Кибербезопасность</span>
+              <span class="badge-pill badge-cyan">Защита данных</span>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">📦 3 модуля · 🎮 3 теста</span>
+            <span class="btn-card">Открыть</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div style="height:2.5rem;"></div>
+
+    <!-- ═══ РАЗДЕЛ 3: СПЕЦДИСЦИПЛИНЫ ═══ -->
+    <div class="catalog-section" data-section="special" id="sec-special">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid #F0FDF4;">
+        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:white;">🌍</div>
+        <div>
+          <div class="section-label" style="margin:0; color:#059669;">Раздел 3</div>
+          <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;">Специальные дисциплины</h2>
+        </div>
+        <span class="badge-pill badge-green" style="margin-left:auto;">1 курс</span>
+      </div>
+
+      <div class="courses-grid" id="grid-special">
+
+        <!-- Курс 5 -->
+        <a href="course.html?id=5" class="course-card course-item" data-section="special" data-title="геоинформационные системы гис пространственные данные" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#F0FDF4,#BBF7D0);">🌍</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-green">Спецдисциплины</span>
+            <h3>Геоинформационные системы (ГИС)</h3>
+            <p>Анализ пространственных данных, работа с картографическими инструментами и геоданными.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+              <span class="badge-pill badge-green">ГИС</span>
+              <span class="badge-pill badge-green">Геоданные</span>
+              <span class="badge-pill badge-green">Картография</span>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">📦 3 модуля · 🎮 3 теста</span>
+            <span class="btn-card">Открыть</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Пустой результат поиска -->
+    <div id="noResults" style="display:none; text-align:center; padding:3rem 0; color:var(--text-secondary);">
+      <div style="font-size:3rem; margin-bottom:1rem;">🔍</div>
+      <h3 style="font-weight:800; margin-bottom:0.5rem;">Ничего не найдено</h3>
+      <p>Попробуйте другой запрос или сбросьте фильтр</p>
+      <button class="filter-btn" style="margin-top:1rem;" onclick="resetFilter()">Показать все курсы</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#4F46E5,#06B6D4); padding:3rem 2rem; text-align:center;">
+  <div class="container">
+    <h2 style="color:white; font-size:1.8rem; font-weight:800; margin-bottom:0.8rem;">Выбрали курс?</h2>
+    <p style="color:rgba(255,255,255,0.85); margin-bottom:2rem;">Войдите по номеру телефона и начните обучение прямо сейчас</p>
+    <button class="btn-hero" style="background:white;color:var(--primary);box-shadow:0 8px 25px rgba(0,0,0,0.15);" onclick="openModal()">
+      📱 Войти и записаться
+    </button>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem;line-height:1.6;max-width:280px;">Педагогическое программное средство для повышения эффективности образовательного процесса.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+      <a href="teacher.html">Преподавателям</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+    <span>Педагогические программные средства</span>
+  </div>
+</footer>
+
+<!-- МОДАЛКА ВХОДА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Добро пожаловать!</h2>
+      <p>Введите номер телефона для входа</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  let activeFilter = 'all';
+
+  // Читаем URL параметр ?section=...
+  const urlSection = getParam('section');
+  if (urlSection) {
+    const btn = document.querySelector(`.filter-btn[onclick*="${urlSection}"]`);
+    if (btn) { setFilter(urlSection, btn); }
+  }
+
+  function setFilter(section, btn) {
+    activeFilter = section;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterAll();
+  }
+
+  function filterAll() {
+    const q = document.getElementById('catalogSearch').value.trim().toLowerCase();
+    let anyVisible = false;
+
+    document.querySelectorAll('.course-item').forEach(card => {
+      const matchSection = activeFilter === 'all' || card.dataset.section === activeFilter;
+      const matchSearch  = !q || card.dataset.title.includes(q) ||
+                           card.querySelector('h3').textContent.toLowerCase().includes(q) ||
+                           card.querySelector('p').textContent.toLowerCase().includes(q);
+
+      if (matchSection && matchSearch) {
+        card.style.display = 'flex';
+        anyVisible = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Скрываем/показываем секции
+    document.querySelectorAll('.catalog-section').forEach(sec => {
+      const sectionMatch = activeFilter === 'all' || sec.dataset.section === activeFilter;
+      const hasVisible = [...sec.querySelectorAll('.course-item')].some(c => c.style.display !== 'none');
+      sec.style.display = (sectionMatch && hasVisible) ? 'block' : 'none';
+    });
+
+    document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
+  }
+
+  function resetFilter() {
+    activeFilter = 'all';
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filter-btn').classList.add('active');
+    document.getElementById('catalogSearch').value = '';
+    filterAll();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>О платформе — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html" class="active">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+    <button class="btn-primary" onclick="openModal()">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE,#F0FDF4);padding:4rem 2rem;border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+      <div>
+        <div class="hero-badge" style="animation:none;display:inline-flex;">🏫 Университетский проект</div>
+        <h1 style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:1rem;line-height:1.15;">
+          О платформе<br>
+          <span style="background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ЭдуПлатформа</span>
+        </h1>
+        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.75;margin-bottom:2rem;">
+          Образовательная платформа, созданная как педагогическое программное средство
+          для повышения эффективности дистанционного обучения. Объединяет современные
+          методики PBL, геймификацию и автоматический контроль знаний.
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="catalog.html" class="btn-hero">📚 Начать обучение</a>
+          <a href="stages.html" class="btn-hero-outline">🔬 Этапы ППС</a>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE);border-radius:var(--radius-xl);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:6rem;border:1px solid var(--border);">
+        🎓
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- МИССИЯ -->
+<section class="section">
+  <div class="container">
+    <div style="max-width:780px;margin:0 auto;text-align:center;">
+      <div class="section-label">Миссия</div>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.2rem;">Сделать дистанционное обучение<br>по-настоящему эффективным</h2>
+      <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.8;">
+        Мы создали платформу, которая решает главную проблему ДО — низкую вовлечённость студентов.
+        Через игровые механики, интерактивные тесты и прозрачную аналитику каждый студент
+        понимает свой прогресс, а преподаватель видит, кому нужна помощь.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ЦИФРЫ -->
+<section class="section section-soft">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;text-align:center;">
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1rem;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;font-weight:800;color:var(--primary);letter-spacing:-0.03em;">5</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-top:0.3rem;">Курсов</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1rem;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;font-weight:800;color:var(--secondary);letter-spacing:-0.03em;">15+</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-top:0.3rem;">Модулей</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1rem;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;font-weight:800;color:var(--success);letter-spacing:-0.03em;">15+</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-top:0.3rem;">Интерактивных тестов</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1rem;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;font-weight:800;color:var(--warning);letter-spacing:-0.03em;">3</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-top:0.3rem;">Направления</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1rem;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;font-weight:800;color:var(--primary);letter-spacing:-0.03em;">10</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-top:0.3rem;">Страниц</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- МЕТОДОЛОГИЯ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Методология</div>
+      <h2>На чём основана платформа</h2>
+      <p class="section-sub">Три педагогических подхода, доказавших свою эффективность</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;box-shadow:var(--shadow-sm);">
+        <div style="width:80px;height:80px;border-radius:var(--radius-lg);background:rgba(79,70,229,0.1);display:flex;align-items:center;justify-content:center;font-size:2.2rem;">🧩</div>
+        <div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Problem-Based Learning (PBL)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.8rem;">
+            Метод проблемно-ориентированного обучения, широко применяемый в европейских университетах (датская академическая модель).
+            Вместо лекций студентам даётся реальная проблемная задача — они самостоятельно ищут решение и изучают теорию в процессе.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <span class="badge-pill badge-blue">Критическое мышление</span>
+            <span class="badge-pill badge-blue">Командная работа</span>
+            <span class="badge-pill badge-blue">Практические навыки</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;box-shadow:var(--shadow-sm);">
+        <div style="width:80px;height:80px;border-radius:var(--radius-lg);background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;font-size:2.2rem;">🎮</div>
+        <div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Педагогическая геймификация</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.8rem;">
+            Применение игровых механик в образовании: баллы, бейджи, уровни, лидерборд, стрики.
+            Форматы Alias, Wordle, SOYA и дебаты делают обучение увлекательным и повышают
+            внутреннюю мотивацию студентов.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <span class="badge-pill badge-amber">Мотивация</span>
+            <span class="badge-pill badge-amber">Вовлечённость</span>
+            <span class="badge-pill badge-amber">Соревновательность</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;box-shadow:var(--shadow-sm);">
+        <div style="width:80px;height:80px;border-radius:var(--radius-lg);background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:2.2rem;">📊</div>
+        <div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;">Автоматический контроль и аналитика</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.8rem;">
+            Интерактивные тесты через LearningApps после каждого модуля с мгновенной проверкой.
+            Преподаватель получает полную аналитику: посещаемость, успеваемость по модулям,
+            проблемные темы и индивидуальный прогресс каждого студента.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <span class="badge-pill badge-green">Автопроверка</span>
+            <span class="badge-pill badge-green">Обратная связь</span>
+            <span class="badge-pill badge-green">Аналитика</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ТЕХНОЛОГИИ -->
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Технологии</div>
+      <h2>Технологический стек</h2>
+      <p class="section-sub">Современные инструменты, на которых построена платформа</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;">
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">🌐</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">HTML5 / CSS3</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Структура и стили</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">⚡</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">JavaScript</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Интерактивность</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">🐍</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">Python Flask</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Бэкенд / API</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">🗄</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">SQLite</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">База данных</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">🎮</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">LearningApps</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Интерактивные тесты</div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;flex-shrink:0;">📱</div>
+        <div>
+          <div style="font-weight:800;font-size:0.92rem;">Eskiz.uz SMS</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">Авторизация по телефону</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КОМАНДА -->
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center" style="max-width:500px;margin-left:auto;margin-right:auto;margin-bottom:2.5rem;">
+      <div class="section-label">Команда</div>
+      <h2>Кто создал платформу</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;">
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;text-align:center;box-shadow:var(--shadow-sm);">
+        <div class="avatar" style="margin:0 auto 1rem;width:64px;height:64px;font-size:1.2rem;">АМ</div>
+        <div style="font-weight:800;font-size:0.95rem;margin-bottom:0.2rem;">Автор проекта</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Студент группы 1001-23 КИ</div>
+        <div style="margin-top:0.8rem;"><span class="badge-pill badge-blue">Разработка</span></div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;text-align:center;box-shadow:var(--shadow-sm);">
+        <div class="avatar" style="margin:0 auto 1rem;width:64px;height:64px;font-size:1.2rem;background:linear-gradient(135deg,#10B981,#059669);">НР</div>
+        <div style="font-weight:800;font-size:0.95rem;margin-bottom:0.2rem;">Научный руководитель</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Кафедра педагогики</div>
+        <div style="margin-top:0.8rem;"><span class="badge-pill badge-green">Методология</span></div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;text-align:center;box-shadow:var(--shadow-sm);">
+        <div class="avatar" style="margin:0 auto 1rem;width:64px;height:64px;font-size:1.2rem;background:linear-gradient(135deg,#06B6D4,#0891B2);">КИ</div>
+        <div style="font-weight:800;font-size:0.95rem;margin-bottom:0.2rem;">Кафедра информатики</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Технический консультант</div>
+        <div style="margin-top:0.8rem;"><span class="badge-pill badge-cyan">IT-поддержка</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#4F46E5,#06B6D4);padding:3rem 2rem;text-align:center;">
+  <div class="container">
+    <h2 style="color:white;font-size:1.8rem;font-weight:800;margin-bottom:0.8rem;">Присоединяйтесь к платформе</h2>
+    <p style="color:rgba(255,255,255,0.85);margin-bottom:2rem;">Войдите по номеру телефона и начните обучение</p>
+    <button class="btn-hero" style="background:white;color:var(--primary);box-shadow:0 8px 25px rgba(0,0,0,0.15);" onclick="openModal()">
+      📱 Войти по номеру телефона
+    </button>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem;line-height:1.6;max-width:280px;">Педагогическое программное средство для повышения эффективности образовательного процесса.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+    <span>Педагогические программные средства</span>
+  </div>
+</footer>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Добро пожаловать!</h2>
+      <p>Войдите по номеру телефона</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

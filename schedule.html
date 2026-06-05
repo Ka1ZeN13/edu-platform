@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Расписание — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+    <button class="btn-primary" onclick="openModal()">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- ШАПКА -->
+<section style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE);padding:3rem 2rem;border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-label">Вебинары</div>
+    <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem;">Расписание занятий</h1>
+    <p style="color:var(--text-secondary);">Онлайн-вебинары, дебаты и консультации по всем курсам</p>
+  </div>
+</section>
+
+<!-- ФИЛЬТРЫ -->
+<section style="background:white;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:50;box-shadow:var(--shadow-sm);">
+  <div class="container" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:center;">
+    <button class="filter-btn active" onclick="setSchedFilter('all',this)">Все курсы</button>
+    <button class="filter-btn" onclick="setSchedFilter('pedagogy',this)">🎓 Педагогика</button>
+    <button class="filter-btn" onclick="setSchedFilter('it',this)">💻 IT</button>
+    <button class="filter-btn" onclick="setSchedFilter('special',this)">🌍 Спецдисциплины</button>
+  </div>
+</section>
+
+<!-- РАСПИСАНИЕ -->
+<section class="section">
+  <div class="container">
+
+    <!-- Ближайший вебинар -->
+    <div style="background:linear-gradient(135deg,#4F46E5,#06B6D4);border-radius:var(--radius-xl);padding:2rem;color:white;margin-bottom:2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+      <div style="font-size:3rem;">🔴</div>
+      <div style="flex:1;">
+        <div style="font-size:0.75rem;font-weight:700;opacity:0.8;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Ближайший вебинар</div>
+        <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.3rem;">Технологии ДО — Модуль 3: Геймификация</h2>
+        <p style="opacity:0.85;font-size:0.9rem;">📅 6 июня 2024, 10:00–11:30 · 👤 Алишер Каримов · Google Meet</p>
+      </div>
+      <a href="#" class="btn-hero" style="background:white;color:var(--primary);box-shadow:none;white-space:nowrap;">Подключиться →</a>
+    </div>
+
+    <!-- Июнь -->
+    <div style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;">
+        <h2 style="font-size:1.1rem;font-weight:800;">📅 Июнь 2024</h2>
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+        <span style="font-size:0.82rem;color:var(--text-muted);font-weight:600;">7 занятий</span>
+      </div>
+
+      <div class="schedule-list" id="scheduleList">
+
+        <div class="schedule-item sched-item" data-cat="pedagogy" style="border-color:var(--primary);">
+          <div class="schedule-date"><div class="day">6</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Технологии ДО — Модуль 3: Геймификация</h4>
+            <p>⏰ 10:00–11:30 · 👤 Алишер Каримов · <span style="color:var(--success);font-weight:700;">Google Meet</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join">Подключиться</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="it">
+          <div class="schedule-date"><div class="day">7</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Python — Модуль 3: SQLite и базы данных</h4>
+            <p>⏰ 14:00–15:30 · 👤 Бобур Усманов · <span style="color:#FF6B35;font-weight:700;">Zoom</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="it">
+          <div class="schedule-date"><div class="day">9</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Дебаты: «Жизнь в Instagram: мотивация или депрессия?»</h4>
+            <p>⏰ 11:00–12:00 · 👤 Нилуфар Рашидова · <span style="color:#FF6B35;font-weight:700;">Zoom</span> · ⭐ +20 баллов</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="it">
+          <div class="schedule-date"><div class="day">11</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Кибербезопасность — Игра SOYA: тайные роли</h4>
+            <p>⏰ 15:00–16:30 · 👤 Санжар Тошматов · <span style="color:var(--success);font-weight:700;">Google Meet</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="special">
+          <div class="schedule-date"><div class="day">12</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>ГИС — Практика: Пространственный анализ в QGIS</h4>
+            <p>⏰ 10:00–12:00 · 👤 Дилноза Юсупова · <span style="color:#FF6B35;font-weight:700;">Zoom</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="pedagogy">
+          <div class="schedule-date"><div class="day">14</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Технологии ДО — Итоговая консультация</h4>
+            <p>⏰ 11:00–12:00 · 👤 Алишер Каримов · <span style="color:var(--success);font-weight:700;">Google Meet</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+        <div class="schedule-item sched-item" data-cat="it">
+          <div class="schedule-date"><div class="day">16</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Python — Модуль 4: pandas и анализ данных</h4>
+            <p>⏰ 14:00–15:30 · 👤 Бобур Усманов · <span style="color:#FF6B35;font-weight:700;">Zoom</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">24 участника</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="noSched" style="display:none;text-align:center;padding:2rem;color:var(--text-secondary);">
+        <div style="font-size:2.5rem;margin-bottom:0.8rem;">📅</div>
+        <p style="font-weight:700;">Занятий не найдено</p>
+      </div>
+    </div>
+
+    <!-- Подсказка -->
+    <div style="background:rgba(79,70,229,0.05);border:1px solid rgba(79,70,229,0.12);border-radius:var(--radius-lg);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.4rem;">💡</span>
+      <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;">
+        Войдите в личный кабинет, чтобы получать уведомления о вебинарах за 24 часа.
+        <a href="student.html" style="color:var(--primary);font-weight:700;">Перейти в кабинет →</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem;line-height:1.6;max-width:280px;">Педагогическое программное средство для повышения эффективности образовательного процесса.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+  </div>
+</footer>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Добро пожаловать!</h2>
+      <p>Войдите по номеру телефона</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+function setSchedFilter(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  let any = false;
+  document.querySelectorAll('.sched-item').forEach(item => {
+    const show = cat === 'all' || item.dataset.cat === cat;
+    item.style.display = show ? 'flex' : 'none';
+    if (show) any = true;
+  });
+  document.getElementById('noSched').style.display = any ? 'none' : 'block';
+}
+</script>
+</body>
+</html>

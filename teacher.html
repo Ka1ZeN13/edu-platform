@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Кабинет преподавателя — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span style="font-size:0.85rem;font-weight:700;color:var(--success);">👨‍🏫 Преподаватель</span>
+    <button class="btn-login" onclick="window.location.href='index.html'">Выйти</button>
+  </div>
+</nav>
+
+<!-- ДАШБОРД -->
+<div class="dashboard">
+
+  <!-- ═══ САЙДБАР ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar" style="background:linear-gradient(135deg,#10B981,#059669);">АК</div>
+      <h3>Алишер Каримов</h3>
+      <p>Доцент кафедры педагогики</p>
+      <span class="sidebar-role" style="background:rgba(16,185,129,0.1);color:var(--success);">👨‍🏫 Преподаватель</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#overview" class="active" onclick="showTab('overview',this)">
+        <span class="nav-icon">🏠</span> Обзор
+      </a>
+      <a href="#groups" onclick="showTab('groups',this)">
+        <span class="nav-icon">👥</span> Группы
+      </a>
+      <a href="#analytics" onclick="showTab('analytics',this)">
+        <span class="nav-icon">📊</span> Аналитика
+      </a>
+      <a href="#answers" onclick="showTab('answers',this)">
+        <span class="nav-icon">📝</span> Проверка ответов
+        <span style="margin-left:auto;background:var(--danger);color:white;font-size:0.65rem;font-weight:800;padding:0.15rem 0.45rem;border-radius:50px;">5</span>
+      </a>
+      <a href="#leaderboard" onclick="showTab('leaderboard',this)">
+        <span class="nav-icon">🏆</span> Лидерборд
+      </a>
+      <a href="#schedule" onclick="showTab('schedule',this)">
+        <span class="nav-icon">📅</span> Расписание
+      </a>
+      <a href="#notifications" onclick="showTab('notifications',this)">
+        <span class="nav-icon">🔔</span> Уведомления
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ═══ ОСНОВНОЙ КОНТЕНТ ═══ -->
+  <main class="main-content">
+
+    <!-- ── ОБЗОР ── -->
+    <div id="tab-overview" class="tab-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.8rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h1 style="font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;">Добро пожаловать, Алишер Мирзоевич! 👋</h1>
+          <p style="color:var(--text-secondary);font-size:0.9rem;">Технологии дистанционного обучения · Группа 1001-23 КИ</p>
+        </div>
+        <button class="btn-primary" onclick="showTab('answers', document.querySelector('.sidebar-nav a:nth-child(4)'))">
+          📝 Проверить ответы (5)
+        </button>
+      </div>
+
+      <!-- Статистика -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(79,70,229,0.1);">👥</div>
+          <div class="stat-num">24</div>
+          <div class="stat-label">Студентов в группе</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.1);">📊</div>
+          <div class="stat-num">78%</div>
+          <div class="stat-label">Средняя успеваемость</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,0.1);">📅</div>
+          <div class="stat-num">85%</div>
+          <div class="stat-label">Посещаемость</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(239,68,68,0.1);">⚠️</div>
+          <div class="stat-num">6</div>
+          <div class="stat-label">Долгов по тестам</div>
+        </div>
+      </div>
+
+      <!-- График посещаемости -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:1.2rem;">📈 Посещаемость по неделям</h3>
+        <div style="display:flex;align-items:flex-end;gap:0.6rem;height:120px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--primary),var(--primary-light));border-radius:4px 4px 0 0;width:100%;height:75%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.1</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--primary),var(--primary-light));border-radius:4px 4px 0 0;width:100%;height:90%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.2</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--primary),var(--primary-light));border-radius:4px 4px 0 0;width:100%;height:80%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.3</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--warning),#FCD34D);border-radius:4px 4px 0 0;width:100%;height:65%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.4</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--primary),var(--primary-light));border-radius:4px 4px 0 0;width:100%;height:88%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.5</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex:1;">
+            <div style="background:linear-gradient(to top,var(--secondary),#22D3EE);border-radius:4px 4px 0 0;width:100%;height:85%;"></div>
+            <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Нед.6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Проблемные модули -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">⚠️ Сложные модули (низкие баллы)</h3>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;">
+          <div style="display:flex;align-items:center;gap:1rem;padding:0.8rem;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15);border-radius:var(--radius);">
+            <span style="font-size:1.2rem;">🔐</span>
+            <div style="flex:1;">
+              <div style="font-size:0.88rem;font-weight:700;">Кибербезопасность — Модуль 1</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Средний балл: 42% · 8 студентов с долгами</div>
+            </div>
+            <span class="badge-pill badge-red">Критично</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;padding:0.8rem;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:var(--radius);">
+            <span style="font-size:1.2rem;">🐍</span>
+            <div style="flex:1;">
+              <div style="font-size:0.88rem;font-weight:700;">Python — Модуль 3: SQLite</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Средний балл: 61% · 4 студента отстают</div>
+            </div>
+            <span class="badge-pill badge-amber">Внимание</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Непроверенные ответы -->
+      <div style="background:linear-gradient(135deg,rgba(79,70,229,0.06),rgba(6,182,212,0.06));border:1px solid rgba(79,70,229,0.15);border-radius:var(--radius-lg);padding:1.4rem;display:flex;align-items:center;gap:1.2rem;">
+        <span style="font-size:2rem;">📝</span>
+        <div style="flex:1;">
+          <div style="font-weight:800;margin-bottom:0.2rem;">5 открытых ответов ждут проверки</div>
+          <div style="font-size:0.85rem;color:var(--text-secondary);">Студенты ждут обратной связи</div>
+        </div>
+        <button class="btn-primary" onclick="showTab('answers',document.querySelectorAll('.sidebar-nav a')[3])">Проверить →</button>
+      </div>
+    </div>
+
+    <!-- ── ГРУППЫ ── -->
+    <div id="tab-groups" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">👥 Список студентов — Группа 1001-23 КИ</h2>
+
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);">
+        <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;">
+          <span style="font-size:0.88rem;font-weight:700;color:var(--text-secondary);">24 студента</span>
+          <div class="search-box" style="max-width:250px;">
+            <span>🔍</span>
+            <input type="text" placeholder="Поиск студента..." oninput="filterStudents(this.value)" />
+          </div>
+        </div>
+
+        <div id="studentTable">
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:0.7rem 1.5rem;background:var(--bg-soft);font-size:0.78rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">
+            <span>Студент</span><span>Баллы</span><span>Посещаемость</span><span>Прогресс</span><span>Статус</span>
+          </div>
+          <div id="studentRows"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── АНАЛИТИКА ── -->
+    <div id="tab-analytics" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📊 Аналитика успеваемости</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+
+        <!-- Успеваемость по курсу -->
+        <div class="analytics-card">
+          <h3>🎓 Успеваемость по модулям</h3>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 1 — Введение</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:92%"></div></div>
+            <span class="analytics-score" style="color:var(--success);">92%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 2 — PBL</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:78%"></div></div>
+            <span class="analytics-score">78%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 3 — Геймификация</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:42%"></div></div>
+            <span class="analytics-score" style="color:var(--danger);">42%</span>
+          </div>
+        </div>
+
+        <!-- Типы заданий -->
+        <div class="analytics-card">
+          <h3>🎮 Результаты по типам тестов</h3>
+          <div class="analytics-row">
+            <span class="analytics-name">Викторина (выбор ответа)</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:88%"></div></div>
+            <span class="analytics-score" style="color:var(--success);">88%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Найти пару</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:82%"></div></div>
+            <span class="analytics-score">82%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Заполнить пропуски</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:65%"></div></div>
+            <span class="analytics-score" style="color:var(--warning);">65%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Кроссворд</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:54%"></div></div>
+            <span class="analytics-score" style="color:var(--danger);">54%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Топ студентов и отстающие -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="analytics-card">
+          <h3>⭐ Топ студентов</h3>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem;">
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;">
+              <span style="font-size:1.1rem;">🥇</span>
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;">ЗА</div>
+              <span style="flex:1;font-weight:700;">Зафар Алимов</span>
+              <span style="font-weight:800;color:var(--primary);">520</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;">
+              <span style="font-size:1.1rem;">🥈</span>
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;background:linear-gradient(135deg,#06B6D4,#0891B2);">НР</div>
+              <span style="flex:1;font-weight:700;">Нилуфар Рахимова</span>
+              <span style="font-weight:800;color:var(--primary);">480</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;">
+              <span style="font-size:1.1rem;">🥉</span>
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;background:linear-gradient(135deg,#10B981,#059669);">ДЮ</div>
+              <span style="flex:1;font-weight:700;">Дилшод Юсупов</span>
+              <span style="font-weight:800;color:var(--primary);">455</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>⚠️ Отстающие студенты</h3>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem;">
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;padding:0.5rem;background:rgba(239,68,68,0.05);border-radius:var(--radius-sm);">
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;background:linear-gradient(135deg,#6B7280,#4B5563);">БК</div>
+              <div style="flex:1;">
+                <div style="font-weight:700;">Барно Каримова</div>
+                <div style="font-size:0.75rem;color:var(--danger);">2 долга по тестам</div>
+              </div>
+              <span style="font-weight:800;color:var(--danger);">240</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;padding:0.5rem;background:rgba(239,68,68,0.05);border-radius:var(--radius-sm);">
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;background:linear-gradient(135deg,#F59E0B,#D97706);">ФА</div>
+              <div style="flex:1;">
+                <div style="font-weight:700;">Фарход Атабоев</div>
+                <div style="font-size:0.75rem;color:var(--danger);">3 долга по тестам</div>
+              </div>
+              <span style="font-weight:800;color:var(--danger);">180</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;padding:0.5rem;background:rgba(239,68,68,0.05);border-radius:var(--radius-sm);">
+              <div class="avatar" style="width:30px;height:30px;font-size:0.7rem;flex-shrink:0;background:linear-gradient(135deg,#EC4899,#DB2777);">ГУ</div>
+              <div style="flex:1;">
+                <div style="font-weight:700;">Гулноза Умарова</div>
+                <div style="font-size:0.75rem;color:var(--warning);">1 долг по тесту</div>
+              </div>
+              <span style="font-weight:800;color:var(--warning);">195</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ПРОВЕРКА ОТВЕТОВ ── -->
+    <div id="tab-answers" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">📝 Открытые ответы — проверка</h2>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">5 ответов ожидают вашей оценки</p>
+
+      <div style="display:flex;flex-direction:column;gap:1.2rem;" id="answerList">
+
+        <!-- Ответ 1 -->
+        <div class="answer-card" style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+            <div class="avatar" style="width:40px;height:40px;font-size:0.85rem;flex-shrink:0;">АИ</div>
+            <div style="flex:1;">
+              <div style="font-weight:800;font-size:0.95rem;">Алишер Исмоилов</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Технологии ДО · Модуль 2 · 3 июня</div>
+            </div>
+            <span class="badge-pill badge-amber">Ожидает</span>
+          </div>
+          <div style="background:var(--bg-soft);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">
+            <strong style="color:var(--text);display:block;margin-bottom:0.4rem;">Задание:</strong>
+            «Учебное заведение переходит на удалёнку при нестабильном интернете. Разработайте архитектуру образовательного процесса.»
+          </div>
+          <div style="background:rgba(79,70,229,0.04);border:1px solid rgba(79,70,229,0.1);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:0.88rem;line-height:1.7;">
+            <strong style="color:var(--primary);display:block;margin-bottom:0.4rem;">Ответ студента:</strong>
+            Предлагаю использовать асинхронный формат: записанные лекции + задания в Classroom. Для офлайн-работы — скачиваемые PDF материалы. Синхронные сессии проводить только для критически важных тем через Google Meet с записью для тех, кто не смог подключиться. Тесты через LearningApps работают и офлайн.
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <label style="font-size:0.82rem;font-weight:700;color:var(--text-secondary);">Балл:</label>
+              <input type="number" min="0" max="20" value="18" style="width:60px;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.3rem 0.5rem;font-weight:800;font-size:0.95rem;" />
+              <span style="font-size:0.82rem;color:var(--text-muted);">/ 20</span>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <input type="text" placeholder="Комментарий для студента..." style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.4rem 0.8rem;font-size:0.85rem;" />
+            </div>
+            <button class="btn-primary" style="padding:0.45rem 1.2rem;border-radius:var(--radius-full);font-size:0.85rem;" onclick="approveAnswer(this)">✓ Принять</button>
+          </div>
+        </div>
+
+        <!-- Ответ 2 -->
+        <div class="answer-card" style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+            <div class="avatar" style="width:40px;height:40px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#EC4899,#DB2777);">МХ</div>
+            <div style="flex:1;">
+              <div style="font-weight:800;font-size:0.95rem;">Малика Хасанова</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Технологии ДО · Модуль 2 · 3 июня</div>
+            </div>
+            <span class="badge-pill badge-amber">Ожидает</span>
+          </div>
+          <div style="background:var(--bg-soft);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">
+            <strong style="color:var(--text);display:block;margin-bottom:0.4rem;">Задание:</strong>
+            «Учебное заведение переходит на удалёнку при нестабильном интернете. Разработайте архитектуру образовательного процесса.»
+          </div>
+          <div style="background:rgba(79,70,229,0.04);border:1px solid rgba(79,70,229,0.1);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:0.88rem;line-height:1.7;">
+            <strong style="color:var(--primary);display:block;margin-bottom:0.4rem;">Ответ студента:</strong>
+            Разделить материал на мини-блоки по 10-15 минут. Использовать Telegram-бота для рассылки материалов — он работает и при слабом интернете. Основные задания — текстовые, без видео. Видеолекции только для дополнительного материала.
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <label style="font-size:0.82rem;font-weight:700;color:var(--text-secondary);">Балл:</label>
+              <input type="number" min="0" max="20" value="16" style="width:60px;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.3rem 0.5rem;font-weight:800;font-size:0.95rem;" />
+              <span style="font-size:0.82rem;color:var(--text-muted);">/ 20</span>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <input type="text" placeholder="Комментарий для студента..." style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.4rem 0.8rem;font-size:0.85rem;" />
+            </div>
+            <button class="btn-primary" style="padding:0.45rem 1.2rem;border-radius:var(--radius-full);font-size:0.85rem;" onclick="approveAnswer(this)">✓ Принять</button>
+          </div>
+        </div>
+
+        <!-- Ответ 3 -->
+        <div class="answer-card" style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+            <div class="avatar" style="width:40px;height:40px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#8B5CF6,#7C3AED);">ОТ</div>
+            <div style="flex:1;">
+              <div style="font-weight:800;font-size:0.95rem;">Отабек Турсунов</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Технологии ДО · Модуль 2 · 4 июня</div>
+            </div>
+            <span class="badge-pill badge-amber">Ожидает</span>
+          </div>
+          <div style="background:rgba(79,70,229,0.04);border:1px solid rgba(79,70,229,0.1);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-size:0.88rem;line-height:1.7;">
+            <strong style="color:var(--primary);display:block;margin-bottom:0.4rem;">Ответ студента:</strong>
+            Предлагаю гибридный подход: основная часть материала в виде текстовых конспектов + короткие аудиозаписи (не видео). Задания через Google Forms без прикреплённых файлов. Синхронные встречи раз в неделю с записью.
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <label style="font-size:0.82rem;font-weight:700;color:var(--text-secondary);">Балл:</label>
+              <input type="number" min="0" max="20" value="15" style="width:60px;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.3rem 0.5rem;font-weight:800;font-size:0.95rem;" />
+              <span style="font-size:0.82rem;color:var(--text-muted);">/ 20</span>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <input type="text" placeholder="Комментарий для студента..." style="width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.4rem 0.8rem;font-size:0.85rem;" />
+            </div>
+            <button class="btn-primary" style="padding:0.45rem 1.2rem;border-radius:var(--radius-full);font-size:0.85rem;" onclick="approveAnswer(this)">✓ Принять</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ЛИДЕРБОРД ── -->
+    <div id="tab-leaderboard" class="tab-content" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h2 style="font-size:1.3rem;font-weight:800;">🏆 Лидерборд группы</h2>
+          <p style="color:var(--text-secondary);font-size:0.9rem;">Группа 1001-23 КИ</p>
+        </div>
+        <button class="btn-hero-outline" style="font-size:0.85rem;padding:0.5rem 1.2rem;" onclick="exportLeaderboard()">📥 Экспорт в таблицу</button>
+      </div>
+
+      <div class="leaderboard">
+        <div class="lb-item top1">
+          <div class="lb-rank">1</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;">ЗА</div>
+          <div class="lb-name">Зафар Алимов</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:100%"></div></div></div>
+          <div class="lb-score">520</div>
+          <div class="lb-badge">👑</div>
+        </div>
+        <div class="lb-item top2">
+          <div class="lb-rank">2</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#06B6D4,#0891B2);">НР</div>
+          <div class="lb-name">Нилуфар Рахимова</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:92%"></div></div></div>
+          <div class="lb-score">480</div>
+          <div class="lb-badge">🥈</div>
+        </div>
+        <div class="lb-item top3">
+          <div class="lb-rank">3</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#10B981,#059669);">ДЮ</div>
+          <div class="lb-name">Дилшод Юсупов</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:87%"></div></div></div>
+          <div class="lb-score">455</div>
+          <div class="lb-badge">🥉</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">4</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;">АИ</div>
+          <div class="lb-name">Алишер Исмоилов</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:65%"></div></div></div>
+          <div class="lb-score">340</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">5</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#F59E0B,#D97706);">СМ</div>
+          <div class="lb-name">Сарвар Мирзаев</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:60%"></div></div></div>
+          <div class="lb-score">310</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">6</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#EC4899,#DB2777);">МХ</div>
+          <div class="lb-name">Малика Хасанова</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:56%"></div></div></div>
+          <div class="lb-score">290</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">7</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#8B5CF6,#7C3AED);">ОТ</div>
+          <div class="lb-name">Отабек Турсунов</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:53%"></div></div></div>
+          <div class="lb-score">275</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item" style="opacity:0.7;">
+          <div class="lb-rank">8</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#6B7280,#4B5563);">БК</div>
+          <div class="lb-name">Барно Каримова</div>
+          <div style="flex:1;padding:0 0.5rem;"><div class="progress-bar" style="height:6px;"><div class="progress-fill" style="width:46%"></div></div></div>
+          <div class="lb-score">240</div>
+          <div class="lb-badge">⚠️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── РАСПИСАНИЕ ── -->
+    <div id="tab-schedule" class="tab-content" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <h2 style="font-size:1.3rem;font-weight:800;">📅 Расписание вебинаров</h2>
+        <button class="btn-primary" style="padding:0.5rem 1.2rem;border-radius:var(--radius-full);font-size:0.85rem;" onclick="addWebinar()">+ Добавить вебинар</button>
+      </div>
+
+      <div class="schedule-list">
+        <div class="schedule-item" style="border-color:var(--primary);">
+          <div class="schedule-date"><div class="day">6</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Технологии ДО — Модуль 3: Геймификация</h4>
+            <p>⏰ 10:00–11:30 · 👥 24 студента · Google Meet</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;">
+            <a href="#" class="btn-join">Начать</a>
+            <button style="padding:0.4rem 0.8rem;border-radius:var(--radius-full);border:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text-secondary);">✏️</button>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-date"><div class="day">9</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Дебаты: «Жизнь в Instagram»</h4>
+            <p>⏰ 14:00–15:00 · 👥 24 студента · Zoom</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <button style="padding:0.4rem 0.8rem;border-radius:var(--radius-full);border:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text-secondary);">✏️</button>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-date"><div class="day">12</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Консультация по итоговому проекту</h4>
+            <p>⏰ 11:00–12:00 · 👥 24 студента · Google Meet</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;">
+            <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+            <button style="padding:0.4rem 0.8rem;border-radius:var(--radius-full);border:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text-secondary);">✏️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── УВЕДОМЛЕНИЯ ── -->
+    <div id="tab-notifications" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🔔 Уведомления</h2>
+      <div class="notif-list">
+        <div class="notif-item new">
+          <span class="notif-icon">📝</span>
+          <div class="notif-text">
+            <strong>Новый ответ на задание</strong>
+            Алишер Исмоилов сдал задание по модулю 2 — ожидает проверки
+          </div>
+          <span class="notif-time">2 ч назад</span>
+        </div>
+        <div class="notif-item new">
+          <span class="notif-icon">💬</span>
+          <div class="notif-text">
+            <strong>Вопрос на форуме</strong>
+            Малика Хасанова задала вопрос в теме «PBL — как оценивать командную работу?»
+          </div>
+          <span class="notif-time">4 ч назад</span>
+        </div>
+        <div class="notif-item warning">
+          <span class="notif-icon">⚠️</span>
+          <div class="notif-text">
+            <strong>Студенты с долгами</strong>
+            6 студентов не прошли тест модуля 1 по кибербезопасности. Срок истекает через 2 дня.
+          </div>
+          <span class="notif-time">вчера</span>
+        </div>
+        <div class="notif-item success">
+          <span class="notif-icon">📊</span>
+          <div class="notif-text">
+            <strong>Отчёт готов</strong>
+            Еженедельный отчёт успеваемости группы 1001-23 КИ доступен
+          </div>
+          <span class="notif-time">2 дня назад</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+// ── СТУДЕНТЫ ──
+const STUDENTS = [
+  { name:'Зафар Алимов',      init:'ЗА', score:520, attendance:95, progress:100, status:'ok'   },
+  { name:'Нилуфар Рахимова',  init:'НР', score:480, attendance:92, progress:95,  status:'ok'   },
+  { name:'Дилшод Юсупов',     init:'ДЮ', score:455, attendance:90, progress:90,  status:'ok'   },
+  { name:'Алишер Исмоилов',   init:'АИ', score:340, attendance:85, progress:67,  status:'ok'   },
+  { name:'Сарвар Мирзаев',    init:'СМ', score:310, attendance:88, progress:62,  status:'ok'   },
+  { name:'Малика Хасанова',   init:'МХ', score:290, attendance:82, progress:58,  status:'ok'   },
+  { name:'Отабек Турсунов',   init:'ОТ', score:275, attendance:80, progress:55,  status:'ok'   },
+  { name:'Барно Каримова',    init:'БК', score:240, attendance:70, progress:48,  status:'debt' },
+  { name:'Фарход Атабоев',    init:'ФА', score:180, attendance:60, progress:36,  status:'debt' },
+  { name:'Гулноза Умарова',   init:'ГУ', score:195, attendance:65, progress:39,  status:'debt' },
+  { name:'Шохрух Каlandarov', init:'ШК', score:320, attendance:87, progress:64,  status:'ok'   },
+  { name:'Диёра Юсупова',     init:'ДЮ', score:260, attendance:75, progress:52,  status:'ok'   },
+];
+
+function renderStudents(list) {
+  document.getElementById('studentRows').innerHTML = list.map(s => `
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:0.8rem 1.5rem;border-bottom:1px solid var(--border);align-items:center;transition:var(--transition);"
+         onmouseover="this.style.background='var(--bg-soft)'" onmouseout="this.style.background=''">
+      <div style="display:flex;align-items:center;gap:0.8rem;">
+        <div class="avatar" style="width:34px;height:34px;font-size:0.72rem;flex-shrink:0;">${s.init}</div>
+        <span style="font-size:0.88rem;font-weight:700;">${s.name}</span>
+      </div>
+      <span style="font-size:0.88rem;font-weight:800;color:var(--primary);">${s.score}</span>
+      <span style="font-size:0.88rem;font-weight:600;color:${s.attendance>=80?'var(--success)':'var(--danger)'};">${s.attendance}%</span>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <div class="progress-bar" style="width:60px;"><div class="progress-fill" style="width:${s.progress}%"></div></div>
+        <span style="font-size:0.78rem;font-weight:700;">${s.progress}%</span>
+      </div>
+      <span class="badge-pill ${s.status==='ok'?'badge-green':'badge-red'}">${s.status==='ok'?'✓ В порядке':'⚠️ Долг'}</span>
+    </div>`).join('');
+}
+
+function filterStudents(q) {
+  const filtered = STUDENTS.filter(s => s.name.toLowerCase().includes(q.toLowerCase()));
+  renderStudents(filtered);
+}
+
+function showTab(name, el) {
+  event.preventDefault();
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.getElementById('tab-' + name).style.display = 'block';
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  if (name === 'groups') renderStudents(STUDENTS);
+}
+
+function approveAnswer(btn) {
+  const card = btn.closest('.answer-card');
+  card.style.opacity = '0.5';
+  card.style.pointerEvents = 'none';
+  btn.textContent = '✓ Принято';
+  btn.style.background = 'var(--success)';
+}
+
+function exportLeaderboard() {
+  alert('Лидерборд экспортирован в Google Таблицы!\n(В реальной версии — интеграция с Google Sheets API)');
+}
+
+function addWebinar() {
+  alert('Форма добавления вебинара будет здесь.\n(В реальной версии — интеграция с Google Calendar)');
+}
+</script>
+</body>
+</html>

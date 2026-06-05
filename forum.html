@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Форум — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html" class="active">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+    <button class="btn-primary" onclick="openModal()">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- ШАПКА -->
+<section style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE);padding:3rem 2rem;border-bottom:1px solid var(--border);">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+    <div>
+      <div class="section-label">Сообщество</div>
+      <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem;">Форум и обсуждения</h1>
+      <p style="color:var(--text-secondary);">Задавай вопросы, делись опытом, участвуй в дебатах</p>
+    </div>
+    <button class="btn-hero" onclick="showNewThread()">✏️ Новая тема</button>
+  </div>
+</section>
+
+<!-- ФИЛЬТРЫ + ПОИСК -->
+<section style="background:white;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:50;box-shadow:var(--shadow-sm);">
+  <div class="container" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+    <div class="search-box" style="flex:1;min-width:200px;">
+      <span>🔍</span>
+      <input type="text" id="forumSearch" placeholder="Поиск по темам..." oninput="filterThreads()" />
+    </div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <button class="filter-btn active" onclick="setForumFilter('all',this)">Все темы</button>
+      <button class="filter-btn" onclick="setForumFilter('question',this)">❓ Вопросы</button>
+      <button class="filter-btn" onclick="setForumFilter('debate',this)">💬 Дебаты</button>
+      <button class="filter-btn" onclick="setForumFilter('project',this)">🛠 Проекты</button>
+    </div>
+  </div>
+</section>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;">
+
+    <!-- СПИСОК ТЕМ -->
+    <div>
+      <!-- Форма новой темы (скрыта) -->
+      <div id="newThreadForm" style="display:none;background:white;border:2px solid var(--primary);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-md);">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">✏️ Создать новую тему</h3>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;">
+          <input type="text" id="newTitle" class="form-input" placeholder="Заголовок темы..." />
+          <select class="form-input" id="newCategory">
+            <option value="question">❓ Вопрос</option>
+            <option value="debate">💬 Дебаты</option>
+            <option value="project">🛠 Проект</option>
+          </select>
+          <textarea class="form-input" id="newText" rows="4" placeholder="Опишите вашу тему подробнее..." style="resize:vertical;border-radius:var(--radius);"></textarea>
+          <div style="display:flex;gap:0.8rem;">
+            <button class="btn-primary" style="padding:0.55rem 1.4rem;border-radius:var(--radius-full);font-size:0.88rem;" onclick="submitThread()">Опубликовать</button>
+            <button onclick="hideNewThread()" style="padding:0.55rem 1.4rem;border-radius:var(--radius-full);border:1px solid var(--border);font-size:0.88rem;font-weight:600;color:var(--text-secondary);">Отмена</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Дебаты (закреплено) -->
+      <div style="margin-bottom:0.8rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.8rem;">
+          <span style="font-size:0.75rem;font-weight:800;color:var(--danger);text-transform:uppercase;letter-spacing:0.08em;">📌 Закреплено</span>
+        </div>
+
+        <div class="forum-thread" data-category="debate" data-title="жизнь instagram мотивация депрессия" style="border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.02);">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#EF4444,#DC2626);">АК</div>
+            <div style="flex:1;">
+              <div class="thread-title">💬 Дебаты: «Жизнь в Instagram: мотивация или депрессия?»</div>
+              <div class="thread-meta">Алишер Каримов (преподаватель) · 1 июня 2024</div>
+            </div>
+            <span class="badge-pill badge-red">Дебаты</span>
+          </div>
+          <div class="thread-preview">Официальная тема для дебатов по курсу «Педагогическая геймификация». Приведите аргументы за или против. Оценивается глубина аргументации и ответы сокурсникам.</div>
+          <div class="thread-footer">
+            <span>💬 18 ответов</span>
+            <span>👁 142 просмотра</span>
+            <span>⭐ +20 баллов за участие</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Все темы -->
+      <div style="margin-bottom:0.8rem;">
+        <div style="font-size:0.75rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.8rem;">Все темы</div>
+      </div>
+
+      <div class="forum-list" id="threadList">
+
+        <div class="forum-thread" data-category="question" data-title="как пройти тест learningapps модуль 2">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#4F46E5,#6366F1);">АИ</div>
+            <div style="flex:1;">
+              <div class="thread-title">Как правильно пройти тест в LearningApps — модуль 2?</div>
+              <div class="thread-meta">Алишер Исмоилов · 3 июня 2024</div>
+            </div>
+            <span class="badge-pill badge-blue">Вопрос</span>
+          </div>
+          <div class="thread-preview">Открываю тест, но iframe не загружается. Пробовал в Chrome и Firefox — одна и та же проблема. Как решить?</div>
+          <div class="thread-footer">
+            <span>💬 4 ответа</span><span>👁 28 просмотров</span>
+            <span class="thread-tag">LearningApps</span>
+          </div>
+        </div>
+
+        <div class="forum-thread" data-category="question" data-title="pbl командная работа как распределить роли">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#EC4899,#DB2777);">МХ</div>
+            <div style="flex:1;">
+              <div class="thread-title">PBL — как распределить роли в команде?</div>
+              <div class="thread-meta">Малика Хасанова · 2 июня 2024</div>
+            </div>
+            <span class="badge-pill badge-blue">Вопрос</span>
+          </div>
+          <div class="thread-preview">В задании сказано объединиться в команды в комментариях. Кто за что отвечает? Нужен ли лидер или это горизонтальная структура?</div>
+          <div class="thread-footer">
+            <span>💬 7 ответов</span><span>👁 56 просмотров</span>
+            <span class="thread-tag">PBL</span>
+          </div>
+        </div>
+
+        <div class="forum-thread" data-category="project" data-title="python kivy проект идеи">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#06B6D4,#0891B2);">ДЮ</div>
+            <div style="flex:1;">
+              <div class="thread-title">Делюсь идеями для итогового проекта по Python + Kivy</div>
+              <div class="thread-meta">Дилшод Юсупов · 2 июня 2024</div>
+            </div>
+            <span class="badge-pill badge-cyan">Проект</span>
+          </div>
+          <div class="thread-preview">Собрал несколько идей для финального проекта: приложение-дневник, учёт расходов, мини-игра. Делитесь своими в комментариях!</div>
+          <div class="thread-footer">
+            <span>💬 12 ответов</span><span>👁 89 просмотров</span>
+            <span class="thread-tag">Python</span><span class="thread-tag">Kivy</span>
+          </div>
+        </div>
+
+        <div class="forum-thread" data-category="debate" data-title="дистанционное обучение лучше очного">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#10B981,#059669);">СМ</div>
+            <div style="flex:1;">
+              <div class="thread-title">💬 Дистанционное обучение лучше очного — согласны?</div>
+              <div class="thread-meta">Сарвар Мирзаев · 1 июня 2024</div>
+            </div>
+            <span class="badge-pill badge-green">Дебаты</span>
+          </div>
+          <div class="thread-preview">Хочу обсудить плюсы и минусы. Лично я считаю, что ДО даёт больше свободы, но теряется живое общение с преподавателем.</div>
+          <div class="thread-footer">
+            <span>💬 9 ответов</span><span>👁 73 просмотра</span>
+            <span class="thread-tag">ДО</span>
+          </div>
+        </div>
+
+        <div class="forum-thread" data-category="question" data-title="gis qgis установка ошибка">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706);">ОТ</div>
+            <div style="flex:1;">
+              <div class="thread-title">Ошибка при установке QGIS — кто сталкивался?</div>
+              <div class="thread-meta">Отабек Турсунов · 31 мая 2024</div>
+            </div>
+            <span class="badge-pill badge-blue">Вопрос</span>
+          </div>
+          <div class="thread-preview">При установке QGIS на Windows 11 выдаёт ошибку «missing VCREDIST». Что делать?</div>
+          <div class="thread-footer">
+            <span>💬 3 ответа</span><span>👁 34 просмотра</span>
+            <span class="thread-tag">ГИС</span>
+          </div>
+        </div>
+
+        <div class="forum-thread" data-category="project" data-title="геймификация класс уроки опыт результаты">
+          <div class="thread-header">
+            <div class="thread-avatar" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);">НР</div>
+            <div style="flex:1;">
+              <div class="thread-title">Попробовал геймификацию в своём классе — делюсь результатами</div>
+              <div class="thread-meta">Нилуфар Рахимова · 30 мая 2024</div>
+            </div>
+            <span class="badge-pill badge-cyan">Проект</span>
+          </div>
+          <div class="thread-preview">Провела урок в формате Alias с терминами из модуля 1. Студенты запомнили в 2 раза больше слов, чем на обычном уроке. Рекомендую!</div>
+          <div class="thread-footer">
+            <span>💬 15 ответов</span><span>👁 112 просмотров</span>
+            <span class="thread-tag">Геймификация</span><span class="thread-tag">Alias</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="noThreads" style="display:none;text-align:center;padding:3rem;color:var(--text-secondary);">
+        <div style="font-size:3rem;margin-bottom:1rem;">🔍</div>
+        <h3 style="font-weight:800;margin-bottom:0.5rem;">Тем не найдено</h3>
+        <button class="filter-btn" onclick="resetForumFilter()" style="margin-top:0.5rem;">Сбросить фильтр</button>
+      </div>
+    </div>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
+    <div style="position:sticky;top:140px;display:flex;flex-direction:column;gap:1.2rem;">
+
+      <!-- Статистика форума -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.88rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Статистика форума</h3>
+        <div style="display:flex;flex-direction:column;gap:0.8rem;">
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+            <span style="color:var(--text-secondary);">Всего тем</span>
+            <span style="font-weight:800;">24</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+            <span style="color:var(--text-secondary);">Ответов</span>
+            <span style="font-weight:800;">156</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+            <span style="color:var(--text-secondary);">Участников</span>
+            <span style="font-weight:800;">24</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+            <span style="color:var(--text-secondary);">Сегодня активных</span>
+            <span style="font-weight:800;color:var(--success);">8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Активные участники -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.88rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Активные участники</h3>
+        <div style="display:flex;flex-direction:column;gap:0.7rem;">
+          <div style="display:flex;align-items:center;gap:0.7rem;">
+            <div class="avatar" style="width:32px;height:32px;font-size:0.72rem;flex-shrink:0;">НР</div>
+            <div style="flex:1;font-size:0.85rem;font-weight:700;">Нилуфар Рахимова</div>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--primary);">15 отв.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.7rem;">
+            <div class="avatar" style="width:32px;height:32px;font-size:0.72rem;flex-shrink:0;background:linear-gradient(135deg,#06B6D4,#0891B2);">ДЮ</div>
+            <div style="flex:1;font-size:0.85rem;font-weight:700;">Дилшод Юсупов</div>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--primary);">12 отв.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.7rem;">
+            <div class="avatar" style="width:32px;height:32px;font-size:0.72rem;flex-shrink:0;background:linear-gradient(135deg,#EC4899,#DB2777);">МХ</div>
+            <div style="flex:1;font-size:0.85rem;font-weight:700;">Малика Хасанова</div>
+            <span style="font-size:0.75rem;font-weight:800;color:var(--primary);">9 отв.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Теги -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.88rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Популярные теги</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <span class="tag" onclick="searchForumTag('PBL')">PBL</span>
+          <span class="tag" onclick="searchForumTag('Python')">Python</span>
+          <span class="tag" onclick="searchForumTag('Геймификация')">Геймификация</span>
+          <span class="tag" onclick="searchForumTag('LearningApps')">LearningApps</span>
+          <span class="tag" onclick="searchForumTag('ГИС')">ГИС</span>
+          <span class="tag" onclick="searchForumTag('Дебаты')">Дебаты</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem;line-height:1.6;max-width:280px;">Педагогическое программное средство для повышения эффективности образовательного процесса.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+  </div>
+</footer>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Войдите, чтобы писать на форуме</h2>
+      <p>Введите номер телефона</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+let forumFilter = 'all';
+
+function setForumFilter(cat, btn) {
+  forumFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterThreads();
+}
+
+function filterThreads() {
+  const q = document.getElementById('forumSearch').value.toLowerCase();
+  let any = false;
+  document.querySelectorAll('#threadList .forum-thread').forEach(t => {
+    const matchCat = forumFilter === 'all' || t.dataset.category === forumFilter;
+    const matchQ   = !q || t.dataset.title.includes(q) || t.querySelector('.thread-title').textContent.toLowerCase().includes(q);
+    t.style.display = (matchCat && matchQ) ? 'block' : 'none';
+    if (matchCat && matchQ) any = true;
+  });
+  document.getElementById('noThreads').style.display = any ? 'none' : 'block';
+}
+
+function resetForumFilter() {
+  forumFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  document.getElementById('forumSearch').value = '';
+  filterThreads();
+}
+
+function searchForumTag(tag) {
+  document.getElementById('forumSearch').value = tag;
+  filterThreads();
+}
+
+function showNewThread() { document.getElementById('newThreadForm').style.display = 'block'; document.getElementById('newThreadForm').scrollIntoView({behavior:'smooth'}); }
+function hideNewThread() { document.getElementById('newThreadForm').style.display = 'none'; }
+
+function submitThread() {
+  const title = document.getElementById('newTitle').value.trim();
+  const text  = document.getElementById('newText').value.trim();
+  const cat   = document.getElementById('newCategory').value;
+  if (!title || !text) { alert('Заполните заголовок и текст'); return; }
+
+  const labels = {question:'badge-blue', debate:'badge-green', project:'badge-cyan'};
+  const names  = {question:'Вопрос', debate:'Дебаты', project:'Проект'};
+
+  const div = document.createElement('div');
+  div.className = 'forum-thread';
+  div.dataset.category = cat;
+  div.dataset.title = title.toLowerCase();
+  div.innerHTML = `
+    <div class="thread-header">
+      <div class="thread-avatar" style="background:linear-gradient(135deg,#4F46E5,#6366F1);">Я</div>
+      <div style="flex:1;">
+        <div class="thread-title">${title}</div>
+        <div class="thread-meta">Вы · Только что</div>
+      </div>
+      <span class="badge-pill ${labels[cat]}">${names[cat]}</span>
+    </div>
+    <div class="thread-preview">${text}</div>
+    <div class="thread-footer"><span>💬 0 ответов</span><span>👁 1 просмотр</span></div>`;
+
+  document.getElementById('threadList').prepend(div);
+  hideNewThread();
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newText').value  = '';
+}
+</script>
+</body>
+</html>

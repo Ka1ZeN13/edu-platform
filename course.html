@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Страница курса — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html" class="active">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+    <button class="btn-primary" onclick="openModal()">Начать обучение</button>
+  </div>
+</nav>
+
+<!-- HERO КУРСА -->
+<div class="course-hero" id="courseHero">
+  <div class="course-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Главная</a>
+        <span>›</span>
+        <a href="catalog.html">Каталог</a>
+        <span>›</span>
+        <span id="breadcrumbTitle">Курс</span>
+      </div>
+
+      <div id="courseBadge" style="margin-bottom:0.8rem;"></div>
+      <h1 id="courseTitle">Загрузка...</h1>
+      <p id="courseDesc" style="font-size:1rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.2rem;"></p>
+
+      <div id="courseTags" class="course-tags"></div>
+
+      <div style="display:flex;gap:2rem;margin-top:1.8rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Модулей</div>
+          <div id="moduleCount" style="font-size:1.4rem;font-weight:800;color:var(--primary);">—</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Тестов</div>
+          <div id="testCount" style="font-size:1.4rem;font-weight:800;color:var(--primary);">—</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Формат</div>
+          <div style="font-size:1.4rem;font-weight:800;color:var(--primary);">Онлайн</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- КАРТОЧКА ЗАПИСИ -->
+    <div class="course-enroll-card">
+      <div style="text-align:center;font-size:3.5rem;margin-bottom:1rem;" id="courseEmoji">📚</div>
+      <div class="enroll-price">Бесплатно</div>
+      <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;">Полный доступ ко всем материалам</div>
+
+      <button class="btn-enroll" onclick="openModal()">
+        🚀 Записаться на курс
+      </button>
+      <button class="btn-enroll" style="background:linear-gradient(135deg,var(--success),#34D399);box-shadow:0 8px 25px rgba(16,185,129,0.25);" onclick="scrollToModules()">
+        📖 Перейти к материалам
+      </button>
+
+      <div style="border-top:1px solid var(--border);margin-top:1.2rem;padding-top:1.2rem;">
+        <div style="font-size:0.82rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.5rem;">
+          <div>✅ Интерактивные тесты LearningApps</div>
+          <div>✅ Сертификат по завершении</div>
+          <div>✅ Доступ с телефона и ПК</div>
+          <div>✅ Баллы и рейтинг группы</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<section class="section">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:2.5rem;align-items:start;">
+
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div>
+
+      <!-- ЧЕМУ НАУЧИТЕСЬ -->
+      <div style="background:linear-gradient(135deg,rgba(79,70,229,0.05),rgba(6,182,212,0.05));border:1px solid rgba(79,70,229,0.12);border-radius:var(--radius-lg);padding:1.8rem;margin-bottom:2rem;">
+        <h2 style="font-size:1.1rem;font-weight:800;margin-bottom:1.2rem;">🎯 Чему вы научитесь</h2>
+        <div id="learningGoals" style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;"></div>
+      </div>
+
+      <!-- ПРОГРАММА КУРСА -->
+      <div id="modulesSection">
+        <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:1.2rem;">📦 Программа курса</h2>
+        <div class="module-list" id="moduleList"></div>
+      </div>
+
+      <!-- ТЕСТ LEARNINGAPPS (встроенный) -->
+      <div id="testSection" style="margin-top:2rem;display:none;">
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;">
+          <h2 style="font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;">🎮 Тест модуля</h2>
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.2rem;" id="testTitle">Пройдите интерактивный тест на LearningApps</p>
+          <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+            <iframe id="testFrame"
+              src=""
+              width="100%"
+              height="480"
+              frameborder="0"
+              allowfullscreen
+              style="display:block;">
+            </iframe>
+          </div>
+          <button onclick="closeTest()" style="margin-top:1rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">✕ Закрыть тест</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div style="position:sticky;top:88px;display:flex;flex-direction:column;gap:1.2rem;">
+
+      <!-- ПРЕПОДАВАТЕЛЬ -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.9rem;font-weight:800;margin-bottom:1.2rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Преподаватель</h3>
+        <div style="display:flex;gap:1rem;align-items:center;">
+          <div id="teacherAvatar" class="avatar" style="width:56px;height:56px;font-size:1.2rem;flex-shrink:0;"></div>
+          <div>
+            <div id="teacherName" style="font-weight:800;font-size:0.95rem;"></div>
+            <div id="teacherRole" style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ПРОГРЕСС -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.9rem;font-weight:800;margin-bottom:1.2rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Ваш прогресс</h3>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-label">
+            <span style="font-size:0.85rem;font-weight:700;">Пройдено</span>
+            <span style="font-size:0.85rem;font-weight:800;color:var(--primary);">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.8rem;">Войдите, чтобы сохранять прогресс</p>
+      </div>
+
+      <!-- СВЯЗАННЫЕ КУРСЫ -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.9rem;font-weight:800;margin-bottom:1rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Похожие курсы</h3>
+        <div id="relatedCourses" style="display:flex;flex-direction:column;gap:0.8rem;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- СКРЫТЫЙ КОНТЕНТ УРОКОВ -->
+<div style="display:none;">
+
+  <div id="lesson-c1-m0-l0">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">📄 Урок 1. Что такое ДО: история и принципы</h3>
+    <p style="margin-bottom:1rem;"><strong>Дистанционное обучение (ДО)</strong> — формат, при котором преподаватель и учащийся находятся на расстоянии, а взаимодействие осуществляется с помощью технологий.</p>
+    <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.2rem;">
+      <div style="background:rgba(79,70,229,0.05);border-left:4px solid #4F46E5;border-radius:0 8px 8px 0;padding:0.8rem 1rem;"><div style="font-weight:800;font-size:0.85rem;margin-bottom:0.3rem;">📮 Этап 1: Корреспондентское обучение (1840)</div><p style="font-size:0.83rem;color:#64748B;">Исаак Питман обучал стенографии по почте. Первые заочные школы рассылали учебники и тесты.</p></div>
+      <div style="background:rgba(6,182,212,0.05);border-left:4px solid #06B6D4;border-radius:0 8px 8px 0;padding:0.8rem 1rem;"><div style="font-weight:800;font-size:0.85rem;margin-bottom:0.3rem;">📺 Этап 2: Радио и ТВ (1969)</div><p style="font-size:0.83rem;color:#64748B;">Открытый университет Великобритании — первый вуз, выдающий степень дистанционно.</p></div>
+      <div style="background:rgba(16,185,129,0.05);border-left:4px solid #10B981;border-radius:0 8px 8px 0;padding:0.8rem 1rem;"><div style="font-weight:800;font-size:0.85rem;margin-bottom:0.3rem;">💻 Этап 3: Интернет и LMS (наши дни)</div><p style="font-size:0.83rem;color:#64748B;">Moodle, Coursera, edX, вебинары, ИИ — полноценная цифровая экосистема.</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:1rem;">
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.8rem;"><div style="font-weight:800;font-size:0.82rem;margin-bottom:0.2rem;">🕐 Гибкость</div><p style="font-size:0.78rem;color:#64748B;">Сам выбираешь время и место учёбы.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.8rem;"><div style="font-weight:800;font-size:0.82rem;margin-bottom:0.2rem;">🌍 Доступность</div><p style="font-size:0.78rem;color:#64748B;">Учёба у лучших без переезда.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.8rem;"><div style="font-weight:800;font-size:0.82rem;margin-bottom:0.2rem;">💬 Интерактивность</div><p style="font-size:0.78rem;color:#64748B;">Тесты, чаты, проекты.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.8rem;"><div style="font-weight:800;font-size:0.82rem;margin-bottom:0.2rem;">🎯 Индивидуализация</div><p style="font-size:0.78rem;color:#64748B;">Трек под конкретного студента.</p></div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(79,70,229,0.07),rgba(6,182,212,0.07));border:1px solid rgba(79,70,229,0.15);border-radius:10px;padding:1rem;">
+      <strong style="color:#4F46E5;">💡 Вывод:</strong> <span style="font-size:0.88rem;color:#64748B;">ДО прошло путь от бумажных писем до виртуальных классов. Главная цель — сделать образование доступным для каждого.</span>
+    </div>
+  </div>
+
+  <div id="lesson-c1-m0-l1">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">📝 Урок 2. Настройка Google Classroom</h3>
+    <p style="margin-bottom:1rem;">Google Classroom — бесплатная платформа для организации дистанционного обучения. Позволяет публиковать задания, проводить тесты и отслеживать прогресс.</p>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem;">
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#4F46E5;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Войти на classroom.google.com</div><p style="font-size:0.8rem;color:#64748B;">Нажми «+» и выбери «Создать класс».</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#4F46E5;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Заполнить данные класса</div><p style="font-size:0.8rem;color:#64748B;">Название, раздел (группа), предмет. Нажми «Создать».</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#4F46E5;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Пригласить студентов</div><p style="font-size:0.8rem;color:#64748B;">Вкладка «Пользователи» → скопируй код → отправь студентам.</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#4F46E5;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Создать темы (модули)</div><p style="font-size:0.8rem;color:#64748B;">Вкладка «Задания» → «Создать тему»: Модуль 1, Модуль 2, Модуль 3.</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#10B981;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Опубликовать первое задание</div><p style="font-size:0.8rem;color:#64748B;">«Создать» → «Задание». Введи условие, прикрепи материалы, установи срок и балл.</p></div>
+      </div>
+    </div>
+    <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:0.9rem;">
+      <strong style="color:#10B981;">✅ Готово!</strong> <span style="font-size:0.85rem;color:#64748B;">Класс создан. Студенты видят задания, преподаватель — прогресс каждого.</span>
+    </div>
+  </div>
+
+  <div id="lesson-c1-m0-l2">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">💬 Урок 3. Создание проблемной задачи (PBL)</h3>
+    <p style="margin-bottom:1rem;">Хорошая PBL-задача — основа курса. Она должна быть реальной, открытой и требовать применения теории из нескольких областей.</p>
+    <h4 style="font-size:0.95rem;font-weight:800;margin-bottom:0.8rem;">📋 Структура PBL-задачи</h4>
+    <div style="background:rgba(79,70,229,0.05);border:1px solid rgba(79,70,229,0.15);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+      <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.83rem;color:#64748B;">
+        <div>🎯 <strong>Контекст:</strong> Описание реальной ситуации</div>
+        <div>❓ <strong>Проблема:</strong> Открытый вопрос без готового ответа</div>
+        <div>📚 <strong>Ресурсы:</strong> Прикреплённые материалы для изучения</div>
+        <div>👥 <strong>Формат:</strong> Командная работа (3–5 человек)</div>
+        <div>📊 <strong>Результат:</strong> Презентация или отчёт с решением</div>
+      </div>
+    </div>
+    <h4 style="font-size:0.95rem;font-weight:800;margin-bottom:0.8rem;">✍️ Пример задачи из курса</h4>
+    <div style="background:white;border:2px solid #4F46E5;border-radius:10px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-weight:800;font-size:0.85rem;margin-bottom:0.5rem;color:#4F46E5;">📌 Задача: Дистанционный класс при нестабильном интернете</div>
+      <p style="font-size:0.83rem;color:#64748B;line-height:1.7;">Учебное заведение переходит на удалёнку. У 40% студентов нестабильный интернет. Разработайте архитектуру процесса, которая позволит всем получить доступ к материалам и сдать задания вовремя.</p>
+    </div>
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:0.9rem;">
+      <strong style="color:#D97706;">💡 Практика:</strong> <span style="font-size:0.85rem;color:#64748B;">Создай собственную PBL-задачу и опубликуй в Google Classroom.</span>
+    </div>
+  </div>
+
+  <div id="lesson-c1-m0-l3">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">🏆 Урок 4. Лидерборд в Google Таблицах</h3>
+    <p style="margin-bottom:1rem;">Лидерборд — рейтинговая таблица студентов по баллам. Мотивирует через здоровую конкуренцию. Оценки из Classroom экспортируются одной кнопкой.</p>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem;">
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#F59E0B;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Экспорт из Classroom</div><p style="font-size:0.8rem;color:#64748B;">Раздел «Оценки» → «Копировать в Google Таблицы». Все оценки группы появятся автоматически.</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#F59E0B;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Добавить колонку «Сумма»</div><p style="font-size:0.8rem;color:#64748B;">Формула: <code style="background:#F8FAFC;padding:1px 5px;border-radius:4px;">=СУММ(C2:Z2)</code> — суммирует все задания студента.</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#F59E0B;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Добавить ранг</div><p style="font-size:0.8rem;color:#64748B;">Формула: <code style="background:#F8FAFC;padding:1px 5px;border-radius:4px;">=RANK(B2,$B$2:$B$25,0)</code> — автоматически определяет место студента.</p></div>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.8rem;background:white;border:1px solid #E2E8F0;border-radius:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#10B981;color:white;font-size:0.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+        <div><div style="font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;">Открыть доступ студентам</div><p style="font-size:0.8rem;color:#64748B;">«Настройки доступа» → «Все с ссылкой могут просматривать». Студенты видят рейтинг!</p></div>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(79,70,229,0.05));border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:0.9rem;">
+      <strong style="color:#D97706;">🏆 Результат:</strong> <span style="font-size:0.85rem;color:#64748B;">Студенты видят свой рейтинг и стремятся подняться выше. Активность растёт на 30–40%.</span>
+    </div>
+  </div>
+
+  <div id="lesson-c1-m1-l0">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">📄 Урок: Принципы PBL и датская модель</h3>
+    <p style="margin-bottom:1rem;"><strong>PBL (Problem-Based Learning)</strong> — проблемно-ориентированное обучение. Процесс начинается с реальной проблемы, для решения которой студенты сами изучают теорию.</p>
+    <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.2rem;">
+      <div style="background:rgba(79,70,229,0.05);border-left:4px solid #4F46E5;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">🎯 Проблема как отправная точка</div><p style="font-size:0.85rem;color:#64748B;">Не лекция, а реальный вызов: «Как обеспечить безопасность данных при нестабильном интернете?»</p></div>
+      <div style="background:rgba(6,182,212,0.05);border-left:4px solid #06B6D4;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">👨‍🎓 Студентоцентричность</div><p style="font-size:0.85rem;color:#64748B;">Студенты сами решают, какие знания нужны и где их искать.</p></div>
+      <div style="background:rgba(16,185,129,0.05);border-left:4px solid #10B981;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">🧑‍🏫 Преподаватель — фасилитатор</div><p style="font-size:0.85rem;color:#64748B;">Задаёт вопросы и направляет, но не решает за студентов.</p></div>
+      <div style="background:rgba(245,158,11,0.05);border-left:4px solid #F59E0B;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">👥 Командная работа</div><p style="font-size:0.85rem;color:#64748B;">Soft skills: умение договариваться, распределять роли, аргументировать позицию.</p></div>
+    </div>
+    <h4 style="font-size:0.95rem;font-weight:800;margin-bottom:0.8rem;">🇩🇰 Датская (Ольборгская) модель PBL</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.9rem;"><div style="font-weight:800;font-size:0.82rem;color:#4F46E5;margin-bottom:0.3rem;">1. Проектная организация</div><p style="font-size:0.8rem;color:#64748B;">Один большой групповой проект на весь семестр.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.9rem;"><div style="font-weight:800;font-size:0.82rem;color:#4F46E5;margin-bottom:0.3rem;">2. Междисциплинарность</div><p style="font-size:0.8rem;color:#64748B;">Знания из разных областей для единого продукта.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.9rem;"><div style="font-weight:800;font-size:0.82rem;color:#4F46E5;margin-bottom:0.3rem;">3. Группы 4–6 человек</div><p style="font-size:0.8rem;color:#64748B;">Оценка за совместную деятельность команды.</p></div>
+      <div style="background:white;border:1px solid #E2E8F0;border-radius:10px;padding:0.9rem;"><div style="font-weight:800;font-size:0.82rem;color:#4F46E5;margin-bottom:0.3rem;">4. Самоуправление</div><p style="font-size:0.8rem;color:#64748B;">Студенты сами формулируют проблему и управляют проектом.</p></div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(79,70,229,0.07),rgba(6,182,212,0.07));border:1px solid rgba(79,70,229,0.15);border-radius:10px;padding:1rem;">
+      <strong style="color:#4F46E5;">💡 Итог:</strong> <span style="font-size:0.88rem;color:#64748B;">Выпускник умеет доводить дело от «непонятной проблемы» до «работающего прототипа» в командной работе.</span>
+    </div>
+  </div>
+
+  <div id="lesson-c1-m2-l0">
+    <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.8rem;color:#4F46E5;">📄 Урок: Педагогическая геймификация</h3>
+    <p style="margin-bottom:1rem;"><strong>Педагогическая геймификация</strong> — внедрение игровых механик в образовательный процесс для повышения мотивации и усвоения материала.</p>
+    <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.2rem;">
+      <div style="background:rgba(79,70,229,0.05);border-left:4px solid #4F46E5;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">🌟 1. Эпическое значение</div><p style="font-size:0.85rem;color:#64748B;">Студенты понимают ради чего выполняют задания. Сторителлинг повышает ценность контента.</p></div>
+      <div style="background:rgba(6,182,212,0.05);border-left:4px solid #06B6D4;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">⚡ 2. Мгновенная обратная связь</div><p style="font-size:0.85rem;color:#64748B;">Студент сразу видит результат. Kahoot, Mentimeter — мгновенная оценка знаний.</p></div>
+      <div style="background:rgba(16,185,129,0.05);border-left:4px solid #10B981;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">🛡 3. Право на ошибку</div><p style="font-size:0.85rem;color:#64748B;">Ошибка — не двойка, а «потеря жизни». Безопасная среда для экспериментов.</p></div>
+      <div style="background:rgba(245,158,11,0.05);border-left:4px solid #F59E0B;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">📈 4. Постепенное усложнение</div><p style="font-size:0.85rem;color:#64748B;">Поддерживать «поток» — задача не слишком лёгкая и не слишком сложная.</p></div>
+      <div style="background:rgba(239,68,68,0.05);border-left:4px solid #EF4444;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">👥 5. Социальный статус</div><p style="font-size:0.85rem;color:#64748B;">Рейтинги, командные турниры, распределение ролей.</p></div>
+      <div style="background:rgba(139,92,246,0.05);border-left:4px solid #8B5CF6;border-radius:0 8px 8px 0;padding:0.9rem 1.1rem;"><div style="font-weight:800;font-size:0.88rem;margin-bottom:0.3rem;">🏆 6. Видимый прогресс</div><p style="font-size:0.85rem;color:#64748B;">Баллы (XP), бейджи, уровни, сертификаты. Студент физически ощущает рост.</p></div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(79,70,229,0.07),rgba(6,182,212,0.07));border:1px solid rgba(79,70,229,0.15);border-radius:10px;padding:1rem;">
+      <strong style="color:#4F46E5;">💡 Вывод:</strong> <span style="font-size:0.88rem;color:#64748B;">Суть геймификации — в грамотном проектировании опыта студента. Мотивация возрастает многократно.</span>
+    </div>
+  </div>
+
+</div>
+<!-- КОНЕЦ СКРЫТОГО КОНТЕНТА -->
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">📚 ЭдуПлатформа</div>
+      <p style="font-size:0.85rem;line-height:1.6;max-width:280px;">Педагогическое программное средство для повышения эффективности образовательного процесса.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Обучение</h4>
+      <a href="catalog.html">Каталог курсов</a>
+      <a href="schedule.html">Расписание</a>
+      <a href="forum.html">Форум</a>
+    </div>
+    <div class="footer-col">
+      <h4>Платформа</h4>
+      <a href="about.html">О платформе</a>
+      <a href="stages.html">Этапы ППС</a>
+    </div>
+    <div class="footer-col">
+      <h4>Кабинет</h4>
+      <a href="student.html">Студенту</a>
+      <a href="teacher.html">Преподавателю</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 ЭдуПлатформа — Университетский проект</span>
+  </div>
+</footer>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Добро пожаловать!</h2>
+      <p>Войдите, чтобы записаться на курс</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+const COURSE_DATA = {
+  1: {
+    title: 'Технологии дистанционного обучения',
+    desc: 'Освойте современные методы дистанционного обучения: от настройки Google Classroom до внедрения PBL и геймификации.',
+    emoji: '🎓',
+    bg: 'linear-gradient(135deg,#EEF2FF,#C7D2FE)',
+    badge: '<span class="badge-pill badge-blue">Педагогика</span>',
+    tags: ['PBL','Google Classroom','Геймификация','Тесты','Рейтинг'],
+    goals: ['Настраивать Google Classroom','Применять метод PBL','Создавать интерактивные тесты','Строить рейтинговую систему','Внедрять геймификацию','Анализировать успеваемость'],
+    teacher: { name: 'Алишер Каримов', role: 'Доцент кафедры педагогики', initials: 'АК' },
+    modules: [
+      {
+        title: 'Модуль 1. Введение в дистанционное обучение',
+        lessons: [
+          { icon: '📄', text: 'Что такое ДО: история и принципы' },
+          { icon: '🎬', text: 'Видео: Обзор платформ ДО' },
+          { icon: '📝', text: 'Настройка Google Classroom' },
+          { icon: '💬', text: 'Практика: Создание первого класса' }
+        ],
+        contentIds: ['lesson-c1-m0-l0', null, 'lesson-c1-m0-l1', null],
+        testTitle: 'Тест: Основы дистанционного обучения',
+        testUrl: 'quiz.html?quiz=c1m1&course=1'
+      },
+      {
+        title: 'Модуль 2. Проблемно-ориентированное обучение (PBL)',
+        lessons: [
+          { icon: '📄', text: 'Принципы PBL и датская модель' },
+          { icon: '🎬', text: 'Видео: PBL в действии' },
+          { icon: '💬', text: 'Создание проблемной задачи' },
+          { icon: '👥', text: 'Командная работа в Classroom' }
+        ],
+        contentIds: ['lesson-c1-m1-l0', null, 'lesson-c1-m0-l2', null],
+        testTitle: 'Тест: Метод PBL',
+        testUrl: 'quiz.html?quiz=c1m2&course=1'
+      },
+      {
+        title: 'Модуль 3. Геймификация и рейтинговая система',
+        lessons: [
+          { icon: '📄', text: 'Принципы педагогической геймификации' },
+          { icon: '🎮', text: 'Alias, Wordle, SOYA — обзор форматов' },
+          { icon: '🏆', text: 'Создание лидерборда в Google Таблицах' },
+          { icon: '💬', text: 'Дебаты: «Жизнь в Instagram»' }
+        ],
+        contentIds: ['lesson-c1-m2-l0', null, 'lesson-c1-m0-l3', null],
+        testTitle: 'Тест: Геймификация в образовании',
+        testUrl: 'quiz.html?quiz=c1m3&course=1'
+      }
+    ]
+  },
+  2: {
+    title: 'Педагогическая геймификация',
+    desc: 'Форматы Alias, Wordle, SOYA и дебаты — как сделать обучение по-настоящему увлекательным.',
+    emoji: '🎮',
+    bg: 'linear-gradient(135deg,#F5F3FF,#DDD6FE)',
+    badge: '<span class="badge-pill badge-blue">Педагогика</span>',
+    tags: ['Alias','Wordle','SOYA','Дебаты','Игровые механики'],
+    goals: ['Разрабатывать игровые задания','Применять формат Alias','Создавать Wordle-упражнения','Проводить дебаты','Внедрять тайные роли (SOYA)','Оценивать вовлечённость'],
+    teacher: { name: 'Нилуфар Рашидова', role: 'Преподаватель методики', initials: 'НР' },
+    modules: [
+      { title: 'Модуль 1. Основы геймификации', lessons: [{ icon: '📄', text: 'Теория: Почему игры работают?' },{ icon: '🎬', text: 'Видео: Геймифицированные уроки' },{ icon: '📝', text: 'Элементы игры в педагогике' },{ icon: '💬', text: 'Практика: Задание-квест' }], contentIds: [null,null,null,null], testTitle: 'Тест: Основы геймификации', testUrl: 'quiz.html?quiz=c2m1&course=2' },
+      { title: 'Модуль 2. Форматы Alias, Wordle и кроссворды', lessons: [{ icon: '🎮', text: 'Alias в учебном процессе' },{ icon: '🔤', text: 'Создание Wordle' },{ icon: '📝', text: 'Кроссворды' },{ icon: '💬', text: 'Создаём свой Alias' }], contentIds: [null,null,null,null], testTitle: 'Тест: Форматы заданий', testUrl: 'quiz.html?quiz=c2m1&course=2' },
+      { title: 'Модуль 3. SOYA и дебаты', lessons: [{ icon: '🎭', text: 'Механика тайных ролей SOYA' },{ icon: '💬', text: 'Организация дебатов' },{ icon: '📊', text: 'Оценка аргументации' },{ icon: '🏆', text: 'Итоговое мероприятие' }], contentIds: [null,null,null,null], testTitle: 'Тест: SOYA и дебаты', testUrl: 'quiz.html?quiz=c2m1&course=2' }
+    ]
+  },
+  3: {
+    title: 'Python-разработка: Kivy, SQLite, pandas',
+    desc: 'От фреймворка Kivy до работы с библиотеками SQLite и pandas.',
+    emoji: '🐍',
+    bg: 'linear-gradient(135deg,#E0F2FE,#BAE6FD)',
+    badge: '<span class="badge-pill badge-cyan">IT</span>',
+    tags: ['Python','Kivy','SQLite','pandas','Разработка'],
+    goals: ['Писать код на Python','Создавать GUI на Kivy','Работать с SQLite','Анализировать данные pandas','Строить мобильные приложения','Работать с датафреймами'],
+    teacher: { name: 'Бобур Усманов', role: 'Преподаватель информатики', initials: 'БУ' },
+    modules: [
+      { title: 'Модуль 1. Основы Python', lessons: [{ icon: '📄', text: 'Синтаксис Python: переменные, функции' },{ icon: '🎬', text: 'Видео: Python за 30 минут' },{ icon: '💻', text: 'Практика: Первая программа' },{ icon: '📝', text: 'Задание: Калькулятор' }], contentIds: [null,null,null,null], testTitle: 'Тест: Основы Python', testUrl: 'quiz.html?quiz=c3m1&course=3' },
+      { title: 'Модуль 2. Фреймворк Kivy', lessons: [{ icon: '📄', text: 'Установка Kivy и первое окно' },{ icon: '🎬', text: 'Видео: Kivy — интерфейс' },{ icon: '💻', text: 'Практика: Кнопки, поля ввода' },{ icon: '📝', text: 'Задание: Мобильное приложение' }], contentIds: [null,null,null,null], testTitle: 'Тест: Kivy', testUrl: 'quiz.html?quiz=c3m1&course=3' },
+      { title: 'Модуль 3. База данных SQLite', lessons: [{ icon: '📄', text: 'SQL запросы: SELECT, INSERT' },{ icon: '💻', text: 'SQLite в Python' },{ icon: '📝', text: 'База данных студентов' },{ icon: '🔗', text: 'Интеграция с Kivy' }], contentIds: [null,null,null,null], testTitle: 'Тест: SQLite', testUrl: 'quiz.html?quiz=c3m1&course=3' },
+      { title: 'Модуль 4. Анализ данных с pandas', lessons: [{ icon: '📄', text: 'DataFrame: основные операции' },{ icon: '📊', text: 'Визуализация matplotlib' },{ icon: '💻', text: 'Анализ CSV файла' },{ icon: '📝', text: 'Итоговый проект' }], contentIds: [null,null,null,null], testTitle: 'Тест: pandas', testUrl: 'quiz.html?quiz=c3m1&course=3' }
+    ]
+  },
+  4: {
+    title: 'Основы кибербезопасности и защита данных',
+    desc: 'Защита данных, моделирование угроз, игра SOYA.',
+    emoji: '🔐',
+    bg: 'linear-gradient(135deg,#EFF6FF,#BFDBFE)',
+    badge: '<span class="badge-pill badge-cyan">IT</span>',
+    tags: ['Кибербезопасность','Защита данных','Шифрование','SOYA'],
+    goals: ['Понимать виды угроз','Применять шифрование','Моделировать атаки','Защищать данные','Работать в команде безопасности','Проводить аудит'],
+    teacher: { name: 'Санжар Тошматов', role: 'Специалист по ИБ', initials: 'СТ' },
+    modules: [
+      { title: 'Модуль 1. Основы информационной безопасности', lessons: [{ icon: '📄', text: 'Виды угроз и атак' },{ icon: '🎬', text: 'Видео: Как работают хакеры' },{ icon: '🎭', text: 'Игра SOYA: тайные роли' },{ icon: '💬', text: 'Кейсы утечек данных' }], contentIds: [null,null,null,null], testTitle: 'Тест: Основы ИБ', testUrl: 'quiz.html?quiz=c1m1&course=4' },
+      { title: 'Модуль 2. Шифрование и защита данных', lessons: [{ icon: '📄', text: 'Симметричное и асимметричное шифрование' },{ icon: '💻', text: 'Шифрование в Python' },{ icon: '📝', text: 'Хэширование паролей' },{ icon: '🔐', text: 'HTTPS и SSL' }], contentIds: [null,null,null,null], testTitle: 'Тест: Шифрование', testUrl: 'quiz.html?quiz=c1m1&course=4' },
+      { title: 'Модуль 3. Архитектура безопасности', lessons: [{ icon: '📄', text: 'Проектирование защищённых систем' },{ icon: '🎭', text: 'Симуляция: удалённая работа' },{ icon: '💬', text: 'Дебаты: приватность vs безопасность' },{ icon: '📝', text: 'Итоговый проект' }], contentIds: [null,null,null,null], testTitle: 'Тест: Архитектура', testUrl: 'quiz.html?quiz=c1m1&course=4' }
+    ]
+  },
+  5: {
+    title: 'Геоинформационные системы (ГИС)',
+    desc: 'Анализ пространственных данных и ГИС-инструменты.',
+    emoji: '🌍',
+    bg: 'linear-gradient(135deg,#F0FDF4,#BBF7D0)',
+    badge: '<span class="badge-pill badge-green">Спецдисциплины</span>',
+    tags: ['ГИС','Геоданные','Картография','Пространственный анализ'],
+    goals: ['Работать с ГИС-инструментами','Анализировать геоданные','Создавать тематические карты','Обрабатывать растровые данные','Применять ГИС на практике','Визуализировать результаты'],
+    teacher: { name: 'Дилноза Юсупова', role: 'Преподаватель географии', initials: 'ДЮ' },
+    modules: [
+      { title: 'Модуль 1. Введение в ГИС', lessons: [{ icon: '📄', text: 'Что такое ГИС: история и применение' },{ icon: '🎬', text: 'Видео: Обзор ГИС-программ' },{ icon: '🗺', text: 'Практика: Первая карта в QGIS' },{ icon: '📝', text: 'Задание: Картирование района' }], contentIds: [null,null,null,null], testTitle: 'Тест: Основы ГИС', testUrl: 'quiz.html?quiz=c1m1&course=5' },
+      { title: 'Модуль 2. Пространственный анализ', lessons: [{ icon: '📄', text: 'Векторные и растровые данные' },{ icon: '💻', text: 'Буферные зоны' },{ icon: '📊', text: 'Атрибутивные таблицы' },{ icon: '📝', text: 'Анализ транспортной сети' }], contentIds: [null,null,null,null], testTitle: 'Тест: Пространственный анализ', testUrl: 'quiz.html?quiz=c1m1&course=5' },
+      { title: 'Модуль 3. Практические проекты ГИС', lessons: [{ icon: '🌍', text: 'Спутниковые снимки' },{ icon: '📊', text: 'Тематическое картографирование' },{ icon: '💻', text: 'Экспорт результатов' },{ icon: '📝', text: 'Итоговый проект: ГИС-анализ' }], contentIds: [null,null,null,null], testTitle: 'Тест: ГИС-проекты', testUrl: 'quiz.html?quiz=c1m1&course=5' }
+    ]
+  }
+};
+
+function loadCourse() {
+  const id = parseInt(getParam('id')) || 1;
+  const c = COURSE_DATA[id];
+  if (!c) { window.location.href = 'catalog.html'; return; }
+
+  document.title = c.title + ' — ЭдуПлатформа';
+  document.getElementById('breadcrumbTitle').textContent = c.title;
+  document.getElementById('courseBadge').innerHTML = c.badge;
+  document.getElementById('courseTitle').textContent = c.title;
+  document.getElementById('courseDesc').textContent = c.desc;
+  document.getElementById('courseEmoji').textContent = c.emoji;
+  document.getElementById('moduleCount').textContent = c.modules.length;
+  document.getElementById('testCount').textContent = c.modules.length;
+
+  document.getElementById('courseTags').innerHTML = c.tags.map(t =>
+    `<span class="tag">${t}</span>`).join('');
+
+  document.getElementById('learningGoals').innerHTML = c.goals.map(g =>
+    `<div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;">
+      <span style="color:var(--success);flex-shrink:0;">✓</span> ${g}
+    </div>`).join('');
+
+  document.getElementById('teacherAvatar').textContent = c.teacher.initials;
+  document.getElementById('teacherName').textContent = c.teacher.name;
+  document.getElementById('teacherRole').textContent = c.teacher.role;
+
+  document.getElementById('moduleList').innerHTML = c.modules.map((m, i) => {
+    const lessonsHtml = m.lessons.map((l, li) => {
+      const hasContent = m.contentIds && m.contentIds[li];
+      return `<div class="lesson-item" ${hasContent ? `onclick="toggleLessonContent(${i},${li})" style="cursor:pointer;"` : ''}>
+        <span class="lesson-icon">${l.icon}</span>
+        <span>${l.text}</span>
+        ${hasContent ? '<span style="margin-left:auto;font-size:0.72rem;color:var(--primary);font-weight:700;">📖 Читать</span>' : ''}
+      </div>`;
+    }).join('');
+
+    const contentsHtml = m.lessons.map((l, li) => {
+      const cid = m.contentIds && m.contentIds[li];
+      if (!cid) return '';
+      return `<div id="lc-${i}-${li}" style="display:none;border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;"></div>`;
+    }).join('');
+
+    return `<div class="module-item" id="module-${i}">
+      <div class="module-header" onclick="toggleModule(this)">
+        <div class="module-num">${i + 1}</div>
+        <div>
+          <div class="module-title">${m.title}</div>
+          <div class="module-meta">${m.lessons.length} урока · Тест после модуля</div>
+        </div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body">
+        <div class="lesson-list">${lessonsHtml}</div>
+        ${contentsHtml}
+        <div class="test-banner" style="margin-top:1rem;">
+          <div>
+            <div class="test-banner-text">🎮 ${m.testTitle}</div>
+            <div class="test-banner-sub">Интерактивный тест · 5 вопросов · 20 баллов</div>
+          </div>
+          <a href="${m.testUrl}" class="btn-test">Пройти тест</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const related = Object.entries(COURSE_DATA)
+    .filter(([k]) => parseInt(k) !== id).slice(0, 3);
+
+  document.getElementById('relatedCourses').innerHTML = related.map(([k, r]) => `
+    <a href="course.html?id=${k}" style="display:flex;align-items:center;gap:0.8rem;text-decoration:none;padding:0.6rem;border-radius:var(--radius-sm);transition:var(--transition);"
+       onmouseover="this.style.background='var(--bg-soft)'" onmouseout="this.style.background=''">
+      <span style="font-size:1.5rem;">${r.emoji}</span>
+      <span style="font-size:0.82rem;font-weight:700;color:var(--text);">${r.title}</span>
+    </a>`).join('');
+
+  setTimeout(() => {
+    const first = document.getElementById('module-0');
+    if (first) first.classList.add('open');
+  }, 300);
+}
+
+function toggleLessonContent(i, li) {
+  const c = COURSE_DATA[parseInt(getParam('id')) || 1];
+  const cid = c.modules[i].contentIds[li];
+  if (!cid) return;
+
+  const el = document.getElementById(`lc-${i}-${li}`);
+  if (!el) return;
+
+  if (el.style.display === 'none') {
+    // Заполняем контентом из скрытого div
+    const src = document.getElementById(cid);
+    if (src && !el.innerHTML.trim()) {
+      el.innerHTML = src.innerHTML;
+    }
+    // Закрываем другие открытые уроки в этом модуле
+    document.querySelectorAll(`[id^="lc-${i}-"]`).forEach(other => {
+      if (other !== el) other.style.display = 'none';
+    });
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function scrollToModules() {
+  document.getElementById('modulesSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+loadCourse();
+</script>
+</body>
+</html>

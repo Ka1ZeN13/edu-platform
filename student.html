@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Личный кабинет студента — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+    <li><a href="stages.html">Этапы ППС</a></li>
+    <li><a href="about.html">О платформе</a></li>
+    <li><a href="forum.html">Форум</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span style="font-size:0.85rem;font-weight:700;color:var(--primary);">👨‍🎓 Студент</span>
+    <button class="btn-login" onclick="window.location.href='index.html'">Выйти</button>
+  </div>
+</nav>
+
+<!-- ДАШБОРД -->
+<div class="dashboard">
+
+  <!-- ═══ САЙДБАР ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar">АИ</div>
+      <h3>Алишер Исмоилов</h3>
+      <p>Группа 1001-23 КИ</p>
+      <span class="sidebar-role" style="background:rgba(79,70,229,0.1);color:var(--primary);">👨‍🎓 Студент</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#overview" class="active" onclick="showTab('overview',this)">
+        <span class="nav-icon">🏠</span> Обзор
+      </a>
+      <a href="#courses" onclick="showTab('courses',this)">
+        <span class="nav-icon">📚</span> Мои курсы
+      </a>
+      <a href="#progress" onclick="showTab('progress',this)">
+        <span class="nav-icon">📊</span> Прогресс
+      </a>
+      <a href="#badges" onclick="showTab('badges',this)">
+        <span class="nav-icon">🏆</span> Достижения
+      </a>
+      <a href="#leaderboard" onclick="showTab('leaderboard',this)">
+        <span class="nav-icon">🥇</span> Рейтинг
+      </a>
+      <a href="#schedule" onclick="showTab('schedule',this)">
+        <span class="nav-icon">📅</span> Расписание
+      </a>
+      <a href="#diary" onclick="showTab('diary',this)">
+        <span class="nav-icon">📓</span> Дневник
+      </a>
+      <a href="#notifications" onclick="showTab('notifications',this)">
+        <span class="nav-icon">🔔</span> Уведомления
+        <span style="margin-left:auto;background:var(--danger);color:white;font-size:0.65rem;font-weight:800;padding:0.15rem 0.45rem;border-radius:50px;">3</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ═══ ОСНОВНОЙ КОНТЕНТ ═══ -->
+  <main class="main-content">
+
+    <!-- ── ОБЗОР ── -->
+    <div id="tab-overview" class="tab-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.8rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h1 style="font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;">Добро пожаловать, Алишер! 👋</h1>
+          <p style="color:var(--text-secondary);font-size:0.9rem;">Группа 1001-23 КИ · Продолжай учиться!</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius-full);padding:0.5rem 1rem;">
+          <span style="font-size:1.1rem;">🔥</span>
+          <span style="font-weight:800;font-size:0.9rem;color:#D97706;">7 дней подряд</span>
+        </div>
+      </div>
+
+      <!-- Статистика -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(79,70,229,0.1);">📚</div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Активных курса</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.1);">✅</div>
+          <div class="stat-num">8</div>
+          <div class="stat-label">Пройдено модулей</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,0.1);">⭐</div>
+          <div class="stat-num">340</div>
+          <div class="stat-label">Баллов набрано</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(239,68,68,0.1);">⚠️</div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Долга по тестам</div>
+        </div>
+      </div>
+
+      <!-- Быстрый прогресс -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:1.2rem;">📊 Прогресс по курсам</h3>
+
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div>
+            <div class="progress-bar-label">
+              <span style="font-size:0.85rem;font-weight:700;">🎓 Технологии дистанционного обучения</span>
+              <span style="font-size:0.85rem;font-weight:800;color:var(--primary);">67%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+          </div>
+          <div>
+            <div class="progress-bar-label">
+              <span style="font-size:0.85rem;font-weight:700;">🐍 Python-разработка</span>
+              <span style="font-size:0.85rem;font-weight:800;color:var(--primary);">45%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+          </div>
+          <div>
+            <div class="progress-bar-label">
+              <span style="font-size:0.85rem;font-weight:700;">🔐 Кибербезопасность</span>
+              <span style="font-size:0.85rem;font-weight:800;color:var(--danger);">20% — есть долг!</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:20%;background:linear-gradient(90deg,var(--danger),#F87171);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ближайший вебинар -->
+      <div style="background:linear-gradient(135deg,#4F46E5,#06B6D4);border-radius:var(--radius-lg);padding:1.5rem;color:white;margin-bottom:1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.8;margin-bottom:0.5rem;">Ближайший вебинар</div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.3rem;">Технологии дистанционного обучения</h3>
+        <p style="opacity:0.85;font-size:0.88rem;margin-bottom:1.2rem;">📅 Завтра, 10:00 · Google Meet</p>
+        <a href="schedule.html" style="background:white;color:var(--primary);padding:0.5rem 1.2rem;border-radius:var(--radius-full);font-weight:700;font-size:0.85rem;">Подключиться →</a>
+      </div>
+
+      <!-- Уведомления -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">🔔 Последние уведомления</h3>
+        <div class="notif-list">
+          <div class="notif-item new">
+            <span class="notif-icon">📝</span>
+            <div class="notif-text">
+              <strong>Новое задание</strong>
+              Преподаватель добавил задание в модуле 3 по курсу «Технологии ДО»
+            </div>
+            <span class="notif-time">2 ч назад</span>
+          </div>
+          <div class="notif-item warning">
+            <span class="notif-icon">⚠️</span>
+            <div class="notif-text">
+              <strong>Долг по тесту</strong>
+              Не пройден тест модуля 1 по курсу «Кибербезопасность»
+            </div>
+            <span class="notif-time">вчера</span>
+          </div>
+          <div class="notif-item success">
+            <span class="notif-icon">🏆</span>
+            <div class="notif-text">
+              <strong>Новый бейдж!</strong>
+              Вы получили бейдж «Неделя без пропусков» 🔥
+            </div>
+            <span class="notif-time">2 дня назад</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── МОИ КУРСЫ ── -->
+    <div id="tab-courses" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📚 Мои курсы</h2>
+
+      <div class="courses-grid">
+        <a href="course.html?id=1" class="course-card" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#EEF2FF,#C7D2FE);">🎓</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-blue">Педагогика</span>
+            <h3>Технологии дистанционного обучения</h3>
+            <div style="margin-top:0.8rem;">
+              <div class="progress-bar-label" style="margin-bottom:0.4rem;">
+                <span style="font-size:0.78rem;color:var(--text-muted);">Прогресс</span>
+                <span style="font-size:0.78rem;font-weight:800;color:var(--primary);">67%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">✅ 2 из 3 модулей</span>
+            <span class="btn-card">Продолжить</span>
+          </div>
+        </a>
+
+        <a href="course.html?id=3" class="course-card" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#E0F2FE,#BAE6FD);">🐍</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-cyan">IT</span>
+            <h3>Python-разработка</h3>
+            <div style="margin-top:0.8rem;">
+              <div class="progress-bar-label" style="margin-bottom:0.4rem;">
+                <span style="font-size:0.78rem;color:var(--text-muted);">Прогресс</span>
+                <span style="font-size:0.78rem;font-weight:800;color:var(--primary);">45%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta">✅ 2 из 4 модулей</span>
+            <span class="btn-card">Продолжить</span>
+          </div>
+        </a>
+
+        <a href="course.html?id=4" class="course-card" style="text-decoration:none;">
+          <div class="course-card-header" style="background:linear-gradient(135deg,#EFF6FF,#BFDBFE);">🔐</div>
+          <div class="course-card-body">
+            <span class="course-section-badge badge-cyan">IT</span>
+            <h3>Кибербезопасность</h3>
+            <div style="margin-top:0.8rem;">
+              <div class="progress-bar-label" style="margin-bottom:0.4rem;">
+                <span style="font-size:0.78rem;color:var(--text-muted);">Прогресс</span>
+                <span style="font-size:0.78rem;font-weight:800;color:var(--danger);">20% ⚠️</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:20%;background:linear-gradient(90deg,var(--danger),#F87171);"></div></div>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <span class="course-meta" style="color:var(--danger);">⚠️ Долг по тесту!</span>
+            <span class="btn-card">Пройти тест</span>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <a href="catalog.html" class="btn-hero-outline" style="display:inline-flex;">+ Записаться на новый курс</a>
+      </div>
+    </div>
+
+    <!-- ── ПРОГРЕСС ── -->
+    <div id="tab-progress" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📊 Детальный прогресс</h2>
+
+      <div style="display:flex;flex-direction:column;gap:1.2rem;">
+
+        <div class="analytics-card">
+          <h3>🎓 Технологии дистанционного обучения</h3>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 1 — Введение в ДО</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:100%"></div></div>
+            <span class="analytics-score" style="color:var(--success);">100%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 2 — PBL</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:100%"></div></div>
+            <span class="analytics-score" style="color:var(--success);">100%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 3 — Геймификация</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:0%"></div></div>
+            <span class="analytics-score" style="color:var(--text-muted);">0%</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🐍 Python-разработка</h3>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 1 — Основы Python</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:100%"></div></div>
+            <span class="analytics-score" style="color:var(--success);">100%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 2 — Kivy</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:80%"></div></div>
+            <span class="analytics-score">80%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 3 — SQLite</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:0%"></div></div>
+            <span class="analytics-score" style="color:var(--text-muted);">0%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 4 — pandas</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:0%"></div></div>
+            <span class="analytics-score" style="color:var(--text-muted);">0%</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🔐 Кибербезопасность</h3>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 1 — Основы ИБ</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:60%"></div></div>
+            <span class="analytics-score" style="color:var(--warning);">60%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 2 — Шифрование</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:0%"></div></div>
+            <span class="analytics-score" style="color:var(--text-muted);">0%</span>
+          </div>
+          <div class="analytics-row">
+            <span class="analytics-name">Модуль 3 — Архитектура</span>
+            <div class="analytics-bar"><div class="analytics-fill" style="width:0%"></div></div>
+            <span class="analytics-score" style="color:var(--text-muted);">0%</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ДОСТИЖЕНИЯ ── -->
+    <div id="tab-badges" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">🏆 Достижения и бейджи</h2>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">Зарабатывай бейджи за активность и успехи в учёбе</p>
+
+      <!-- Уровень -->
+      <div style="background:linear-gradient(135deg,#4F46E5,#6366F1);border-radius:var(--radius-lg);padding:1.5rem;color:white;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.5rem;">
+        <div style="font-size:3rem;">⚡</div>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;opacity:0.8;text-transform:uppercase;letter-spacing:0.1em;">Текущий уровень</div>
+          <div style="font-size:1.4rem;font-weight:900;letter-spacing:-0.02em;">Практик</div>
+          <div style="font-size:0.82rem;opacity:0.85;margin-top:0.2rem;">340 / 500 очков до уровня «Эксперт»</div>
+        </div>
+        <div style="margin-left:auto;text-align:right;">
+          <div style="font-size:2rem;font-weight:900;">68%</div>
+          <div style="font-size:0.75rem;opacity:0.8;">до следующего</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">Полученные бейджи</h3>
+      <div class="badges-grid" style="margin-bottom:2rem;">
+        <div class="badge-item earned"><span class="badge-icon">🔥</span>7 дней подряд</div>
+        <div class="badge-item earned"><span class="badge-icon">✅</span>Первый тест</div>
+        <div class="badge-item earned"><span class="badge-icon">🚀</span>Быстрый старт</div>
+        <div class="badge-item earned"><span class="badge-icon">💬</span>Активист форума</div>
+        <div class="badge-item earned"><span class="badge-icon">🐍</span>Python новичок</div>
+      </div>
+
+      <h3 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">Ещё не получены</h3>
+      <div class="badges-grid">
+        <div class="badge-item locked"><span class="badge-icon">👑</span>Эксперт</div>
+        <div class="badge-item locked"><span class="badge-icon">🏅</span>Топ-3 рейтинга</div>
+        <div class="badge-item locked"><span class="badge-icon">💯</span>100% курс</div>
+        <div class="badge-item locked"><span class="badge-icon">🎓</span>Выпускник</div>
+        <div class="badge-item locked"><span class="badge-icon">⭐</span>500 баллов</div>
+        <div class="badge-item locked"><span class="badge-icon">📅</span>30 дней</div>
+      </div>
+    </div>
+
+    <!-- ── РЕЙТИНГ ── -->
+    <div id="tab-leaderboard" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">🥇 Рейтинг группы</h2>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">Группа 1001-23 КИ · Текущий модуль</p>
+
+      <div class="leaderboard">
+        <div class="lb-item top1">
+          <div class="lb-rank">1</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;">ЗА</div>
+          <div class="lb-name">Зафар Алимов</div>
+          <div class="lb-score">520 баллов</div>
+          <div class="lb-badge">👑</div>
+        </div>
+        <div class="lb-item top2">
+          <div class="lb-rank">2</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#06B6D4,#0891B2);">НР</div>
+          <div class="lb-name">Нилуфар Рахимова</div>
+          <div class="lb-score">480 баллов</div>
+          <div class="lb-badge">🥈</div>
+        </div>
+        <div class="lb-item top3">
+          <div class="lb-rank">3</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#10B981,#059669);">ДЮ</div>
+          <div class="lb-name">Дилшод Юсупов</div>
+          <div class="lb-score">455 баллов</div>
+          <div class="lb-badge">🥉</div>
+        </div>
+        <div class="lb-item" style="border:2px solid var(--primary);background:rgba(79,70,229,0.04);">
+          <div class="lb-rank" style="background:var(--primary);color:white;">4</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;">АИ</div>
+          <div class="lb-name" style="color:var(--primary);font-weight:800;">Алишер Исмоилов (вы)</div>
+          <div class="lb-score">340 баллов</div>
+          <div class="lb-badge">⚡</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">5</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#F59E0B,#D97706);">СМ</div>
+          <div class="lb-name">Сарвар Мирзаев</div>
+          <div class="lb-score">310 баллов</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">6</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#EC4899,#DB2777);">МХ</div>
+          <div class="lb-name">Малика Хасанова</div>
+          <div class="lb-score">290 баллов</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">7</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#8B5CF6,#7C3AED);">ОТ</div>
+          <div class="lb-name">Отабек Турсунов</div>
+          <div class="lb-score">275 баллов</div>
+          <div class="lb-badge"></div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">8</div>
+          <div class="avatar" style="width:36px;height:36px;font-size:0.8rem;flex-shrink:0;background:linear-gradient(135deg,#6B7280,#4B5563);">БК</div>
+          <div class="lb-name">Барно Каримова</div>
+          <div class="lb-score">240 баллов</div>
+          <div class="lb-badge"></div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-soft);border-radius:var(--radius);padding:1rem;margin-top:1.2rem;text-align:center;font-size:0.85rem;color:var(--text-secondary);">
+        💡 Пройди тест в модуле 3 и обгони Дилшода! До 3-го места всего <strong style="color:var(--primary);">115 баллов</strong>
+      </div>
+    </div>
+
+    <!-- ── РАСПИСАНИЕ ── -->
+    <div id="tab-schedule" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">📅 Расписание вебинаров</h2>
+
+      <div class="schedule-list">
+        <div class="schedule-item" style="border-color:var(--primary);">
+          <div class="schedule-date"><div class="day">6</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Технологии дистанционного обучения — Модуль 3</h4>
+            <p>⏰ 10:00–11:30 · 👤 Алишер Каримов · Google Meet</p>
+          </div>
+          <a href="#" class="btn-join">Подключиться</a>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-date"><div class="day">9</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Python-разработка — Модуль 3: SQLite</h4>
+            <p>⏰ 14:00–15:30 · 👤 Бобур Усманов · Zoom</p>
+          </div>
+          <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-date"><div class="day">11</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Кибербезопасность — Игра SOYA</h4>
+            <p>⏰ 11:00–12:30 · 👤 Санжар Тошматов · Google Meet</p>
+          </div>
+          <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-date"><div class="day">14</div><div class="month">июн</div></div>
+          <div class="schedule-divider"></div>
+          <div class="schedule-info">
+            <h4>Дебаты: «Жизнь в Instagram: мотивация или депрессия?»</h4>
+            <p>⏰ 15:00–16:00 · 👤 Нилуфар Рашидова · Zoom</p>
+          </div>
+          <a href="#" class="btn-join" style="background:var(--text-muted);">Скоро</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ДНЕВНИК ОБУЧЕНИЯ ── -->
+    <div id="tab-diary" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">📓 Дневник обучения</h2>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">Записывай мысли, инсайты и рефлексию после каждого модуля</p>
+
+      <!-- Форма новой записи -->
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:0.95rem;font-weight:800;margin-bottom:1rem;">✏️ Новая запись</h3>
+        <div style="margin-bottom:0.8rem;">
+          <select class="form-input" style="margin-bottom:0.8rem;">
+            <option>🎓 Технологии дистанционного обучения — Модуль 2</option>
+            <option>🐍 Python — Модуль 2</option>
+            <option>🔐 Кибербезопасность — Модуль 1</option>
+          </select>
+          <textarea class="form-input" id="diaryText" rows="4" placeholder="Что нового узнал? Что было сложно? Как буду применять на практике?..." style="resize:vertical;border-radius:var(--radius);"></textarea>
+        </div>
+        <button class="btn-primary" onclick="saveDiary()" style="padding:0.6rem 1.4rem;border-radius:var(--radius-full);font-size:0.88rem;">Сохранить запись</button>
+      </div>
+
+      <!-- Предыдущие записи -->
+      <div style="display:flex;flex-direction:column;gap:1rem;" id="diaryList">
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;">
+            <span class="badge-pill badge-blue">🎓 ТДО — Модуль 2</span>
+            <span style="font-size:0.78rem;color:var(--text-muted);">3 июня 2024</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">Сегодня разобрал метод PBL. Интересно, что студенты сами ищут решения — это сильно отличается от обычных лекций. Буду применять в своём проекте по курсу.</p>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;">
+            <span class="badge-pill badge-cyan">🐍 Python — Модуль 1</span>
+            <span style="font-size:0.78rem;color:var(--text-muted);">1 июня 2024</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">Основы Python даются легко после JavaScript. Главное — понять отступы. Написал первую функцию для расчёта баллов студентов.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── УВЕДОМЛЕНИЯ ── -->
+    <div id="tab-notifications" class="tab-content" style="display:none;">
+      <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem;">🔔 Уведомления</h2>
+
+      <div class="notif-list">
+        <div class="notif-item new">
+          <span class="notif-icon">📝</span>
+          <div class="notif-text">
+            <strong>Новое задание добавлено</strong>
+            Преподаватель Алишер Каримов добавил задание «Разработка архитектуры ДО» в модуле 3
+          </div>
+          <span class="notif-time">2 ч назад</span>
+        </div>
+        <div class="notif-item warning">
+          <span class="notif-icon">⚠️</span>
+          <div class="notif-text">
+            <strong>Долг по тесту!</strong>
+            Не пройден тест модуля 1 по курсу «Кибербезопасность». Срок — 8 июня
+          </div>
+          <span class="notif-time">вчера</span>
+        </div>
+        <div class="notif-item success">
+          <span class="notif-icon">🏆</span>
+          <div class="notif-text">
+            <strong>Новый бейдж получен!</strong>
+            «Неделя без пропусков» — 7 дней подряд на платформе 🔥
+          </div>
+          <span class="notif-time">2 дня назад</span>
+        </div>
+        <div class="notif-item">
+          <span class="notif-icon">📅</span>
+          <div class="notif-text">
+            <strong>Напоминание о вебинаре</strong>
+            Завтра в 10:00 — вебинар по курсу «Технологии ДО»
+          </div>
+          <span class="notif-time">3 дня назад</span>
+        </div>
+        <div class="notif-item success">
+          <span class="notif-icon">✅</span>
+          <div class="notif-text">
+            <strong>Тест проверен</strong>
+            Преподаватель проверил ваш тест по модулю 2 — 18/20 баллов
+          </div>
+          <span class="notif-time">4 дня назад</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+function showTab(name, el) {
+  event.preventDefault();
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.getElementById('tab-' + name).style.display = 'block';
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function saveDiary() {
+  const text = document.getElementById('diaryText').value.trim();
+  if (!text) return;
+  const entry = document.createElement('div');
+  entry.style.cssText = 'background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;box-shadow:var(--shadow-sm);';
+  entry.innerHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem;">
+      <span class="badge-pill badge-blue">📝 Новая запись</span>
+      <span style="font-size:0.78rem;color:var(--text-muted);">Сегодня</span>
+    </div>
+    <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">${text}</p>`;
+  document.getElementById('diaryList').prepend(entry);
+  document.getElementById('diaryText').value = '';
+}
+</script>
+</body>
+</html>

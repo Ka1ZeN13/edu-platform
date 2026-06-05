@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тест — ЭдуПлатформа</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .quiz-wrap {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+
+    .quiz-progress-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .quiz-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      animation: fadeUp 0.3s ease;
+    }
+
+    .quiz-num {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz-question {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+      text-align: left;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .quiz-option:hover {
+      border-color: var(--primary);
+      background: rgba(79,70,229,0.04);
+      transform: translateX(4px);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--primary);
+      background: rgba(79,70,229,0.07);
+      color: var(--primary);
+    }
+
+    .quiz-option.correct {
+      border-color: var(--success);
+      background: rgba(16,185,129,0.08);
+      color: #065F46;
+    }
+
+    .quiz-option.wrong {
+      border-color: var(--danger);
+      background: rgba(239,68,68,0.07);
+      color: #991B1B;
+    }
+
+    .quiz-option.disabled {
+      pointer-events: none;
+    }
+
+    .option-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .quiz-option.selected .option-letter { background: var(--primary); color: white; }
+    .quiz-option.correct .option-letter  { background: var(--success); color: white; }
+    .quiz-option.wrong .option-letter    { background: var(--danger);  color: white; }
+
+    .quiz-feedback {
+      margin-top: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .quiz-feedback.correct {
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: #065F46;
+    }
+
+    .quiz-feedback.wrong {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      color: #991B1B;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    .btn-next {
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-primary);
+      display: none;
+    }
+
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(79,70,229,0.35); }
+
+    /* РЕЗУЛЬТАТ */
+    .quiz-result {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      display: none;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .result-emoji { font-size: 4rem; margin-bottom: 1rem; }
+
+    .result-score {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.3rem;
+    }
+
+    .result-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .result-breakdown {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .breakdown-item {
+      text-align: center;
+    }
+
+    .breakdown-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .breakdown-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .result-answers {
+      text-align: left;
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .answer-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .answer-row:last-child { border-bottom: none; }
+
+    .answer-icon { flex-shrink: 0; font-size: 1rem; margin-top: 0.1rem; }
+    .answer-text { flex: 1; line-height: 1.5; }
+    .answer-correct { font-size: 0.78rem; color: var(--success); font-weight: 700; }
+
+    .result-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<!-- НАВБАР -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">📚</div>
+    <span>ЭдуПлатформа</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Главная</a></li>
+    <li><a href="catalog.html">Каталог курсов</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal()">Войти</button>
+  </div>
+</nav>
+
+<!-- ШАПКА ТЕСТА -->
+<section style="background:linear-gradient(135deg,#EEF2FF,#E0F2FE);padding:2rem;border-bottom:1px solid var(--border);">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="breadcrumb">
+      <a href="catalog.html">Каталог</a>
+      <span>›</span>
+      <a id="backLink" href="course.html?id=1">Курс</a>
+      <span>›</span>
+      <span id="quizBreadcrumb">Тест</span>
+    </div>
+    <h1 id="quizTitle" style="font-size:1.4rem;font-weight:800;margin-top:0.5rem;"></h1>
+    <p id="quizDesc" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.3rem;"></p>
+  </div>
+</section>
+
+<!-- ТЕСТ -->
+<div class="quiz-wrap">
+
+  <!-- Прогресс -->
+  <div class="quiz-progress" id="quizProgress">
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="quiz-progress-text" id="progressText">1 / 5</div>
+  </div>
+
+  <!-- Карточка вопроса -->
+  <div class="quiz-card" id="quizCard">
+    <div class="quiz-num" id="questionNum">Вопрос 1</div>
+    <div class="quiz-question" id="questionText"></div>
+    <div class="quiz-options" id="questionOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-nav">
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">
+        Следующий вопрос →
+      </button>
+    </div>
+  </div>
+
+  <!-- Результат -->
+  <div class="quiz-result" id="quizResult">
+    <div class="result-emoji" id="resultEmoji">🎉</div>
+    <div class="result-score" id="resultScore"></div>
+    <div class="result-label" id="resultLabel"></div>
+    <div class="result-sub" id="resultSub"></div>
+
+    <div class="result-breakdown">
+      <div class="breakdown-item">
+        <div class="breakdown-num" id="correctCount" style="color:var(--success);">0</div>
+        <div class="breakdown-label">Правильно</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-num" id="wrongCount" style="color:var(--danger);">0</div>
+        <div class="breakdown-label">Неправильно</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-num" id="pointsEarned" style="color:var(--primary);">0</div>
+        <div class="breakdown-label">Баллов</div>
+      </div>
+    </div>
+
+    <div class="result-answers" id="resultAnswers"></div>
+
+    <div class="result-btns">
+      <button class="btn-hero-outline" onclick="restartQuiz()" style="display:inline-flex;">🔄 Пройти снова</button>
+      <a id="backToCourse" href="course.html?id=1" class="btn-hero" style="display:inline-flex;">📚 Вернуться к курсу</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div id="stepPhone">
+      <h2>👋 Войдите для сохранения результата</h2>
+      <p>Введите номер телефона</p>
+      <div class="form-group">
+        <label class="form-label">Номер телефона</label>
+        <div class="phone-input-wrap">
+          <span class="phone-prefix">🇺🇿 +998</span>
+          <input type="tel" id="phoneInput" placeholder="90 123 45 67" maxlength="12" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Я вхожу как</label>
+        <select class="form-input" id="roleSelect">
+          <option value="student">👨‍🎓 Студент</option>
+          <option value="teacher">👨‍🏫 Преподаватель</option>
+        </select>
+      </div>
+      <button class="btn-full" onclick="sendOTP()">Получить SMS-код →</button>
+    </div>
+    <div id="stepOTP" style="display:none;">
+      <h2>📱 Введите код</h2>
+      <p id="otpDesc">Код отправлен на ваш номер</p>
+      <div class="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')" />
+        <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,null)" />
+      </div>
+      <button class="btn-full" onclick="verifyOTP()">Войти ✓</button>
+      <button onclick="backToPhone()" style="width:100%;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;font-weight:600;">← Изменить номер</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+
+// ══════════════════════════════════
+//   БАНК ТЕСТОВ
+// ══════════════════════════════════
+
+const QUIZZES = {
+
+  // Курс 1, Модуль 1 — Введение в ДО
+  'c1m1': {
+    title: 'Тест: Введение в дистанционное обучение',
+    desc: 'Модуль 1 · 5 вопросов · 20 баллов',
+    courseId: 1,
+    questions: [
+      {
+        q: 'В каком году Исаак Питман начал первое дистанционное обучение по почте?',
+        options: ['1840', '1969', '1990', '1755'],
+        correct: 0,
+        explanation: 'В 1840 году Исаак Питман начал обучать стенографии по почте в Великобритании — это считается началом дистанционного образования.'
+      },
+      {
+        q: 'Как расшифровывается аббревиатура LMS?',
+        options: [
+          'Система управления обучением',
+          'Язык математических систем',
+          'Метод логического структурирования',
+          'Локальная медиасеть'
+        ],
+        correct: 0,
+        explanation: 'LMS (Learning Management System) — система управления обучением, например Moodle или Google Classroom.'
+      },
+      {
+        q: 'Какой принцип дистанционного обучения позволяет учиться из любой точки мира?',
+        options: ['Доступность', 'Гибкость', 'Интерактивность', 'Индивидуализация'],
+        correct: 0,
+        explanation: 'Принцип доступности (дальнодействия) стирает географические границы — студент может учиться у преподавателей ведущих мировых университетов без переезда.'
+      },
+      {
+        q: 'В каком году был создан Открытый университет Великобритании (Open University)?',
+        options: ['1969', '1840', '2005', '1991'],
+        correct: 0,
+        explanation: 'Open University был создан в 1969 году — это первый вуз, предлагающий получение степени исключительно через дистанционные форматы.'
+      },
+      {
+        q: 'Как называются массовые открытые онлайн-курсы?',
+        options: ['MOOC', 'LMS', 'VR', 'API'],
+        correct: 0,
+        explanation: 'MOOC (Massive Open Online Courses) — массовые открытые онлайн-курсы, например Coursera или edX.'
+      }
+    ]
+  },
+
+  // Курс 1, Модуль 2 — PBL
+  'c1m2': {
+    title: 'Тест: Проблемно-ориентированное обучение (PBL)',
+    desc: 'Модуль 2 · 5 вопросов · 20 баллов',
+    courseId: 1,
+    questions: [
+      {
+        q: 'Что означает аббревиатура PBL?',
+        options: [
+          'Problem-Based Learning (проблемно-ориентированное обучение)',
+          'Project-Based Lesson (проектный урок)',
+          'Personal Blended Learning (смешанное обучение)',
+          'Pedagogical Basic Level (базовый педагогический уровень)'
+        ],
+        correct: 0,
+        explanation: 'PBL — Problem-Based Learning, метод обучения через решение реальных проблем.'
+      },
+      {
+        q: 'Какая страна считается родиной академической модели PBL?',
+        options: ['Дания', 'США', 'Германия', 'Япония'],
+        correct: 0,
+        explanation: 'Датская академическая модель PBL широко признана как эталонная — она активно применяется в ведущих университетах Дании.'
+      },
+      {
+        q: 'Что является главным отличием метода PBL от традиционной лекции?',
+        options: [
+          'Студенты сами ищут решение реальной проблемы',
+          'Преподаватель читает больше лекций',
+          'Используются только видеоматериалы',
+          'Нет никаких заданий'
+        ],
+        correct: 0,
+        explanation: 'В PBL вместо лекции студентам даётся реальная проблемная задача, для решения которой они самостоятельно изучают теорию.'
+      },
+      {
+        q: 'Как роль преподавателя меняется при PBL-подходе?',
+        options: [
+          'Становится ментором и фасилитатором',
+          'Остаётся основным источником знаний',
+          'Полностью исчезает',
+          'Становится только оценщиком'
+        ],
+        correct: 0,
+        explanation: 'При PBL преподаватель трансформируется из "транслятора знаний" в ментора — он направляет и помогает, но не даёт готовые ответы.'
+      },
+      {
+        q: 'Какой инструмент Google удобнее всего использовать для организации PBL в дистанционном формате?',
+        options: ['Google Classroom', 'Google Maps', 'Google Translate', 'Google Drive'],
+        correct: 0,
+        explanation: 'Google Classroom позволяет публиковать задания, организовывать командную работу в комментариях и отслеживать прогресс студентов.'
+      }
+    ]
+  },
+
+  // Курс 1, Модуль 3 — Геймификация
+  'c1m3': {
+    title: 'Тест: Геймификация и рейтинговая система',
+    desc: 'Модуль 3 · 5 вопросов · 20 баллов',
+    courseId: 1,
+    questions: [
+      {
+        q: 'Что такое педагогическая геймификация?',
+        options: [
+          'Применение игровых механик в образовательном процессе',
+          'Проведение уроков в форме компьютерных игр',
+          'Замена учебников на планшеты',
+          'Оценка студентов по игровым результатам'
+        ],
+        correct: 0,
+        explanation: 'Геймификация — это применение игровых механик (баллы, бейджи, уровни, соревнование) в образовательном процессе для повышения мотивации.'
+      },
+      {
+        q: 'Что такое «лидерборд» в контексте образовательной платформы?',
+        options: [
+          'Рейтинговая таблица с баллами студентов',
+          'Доска для написания мелом',
+          'Список учебников',
+          'Расписание занятий'
+        ],
+        correct: 0,
+        explanation: 'Лидерборд — это рейтинговая таблица, где студенты видят свои баллы и позицию среди однокурсников. Это создаёт здоровую соревновательность.'
+      },
+      {
+        q: 'Какую игровую механику использует формат SOYA?',
+        options: ['Тайные роли', 'Карточные дуэли', 'Монополию', 'Викторину'],
+        correct: 0,
+        explanation: 'SOYA использует механику тайных ролей — студенты получают скрытые роли и должны выполнять задачи, не раскрывая свою роль другим.'
+      },
+      {
+        q: 'Какой формат лучше всего подходит для закрепления терминологии?',
+        options: ['Alias или Wordle', 'Только лекции', 'Письменные эссе', 'Устный экзамен'],
+        correct: 0,
+        explanation: 'Alias (объяснение слова без его произношения) и Wordle (угадывание слова) отлично подходят для запоминания терминов в игровой форме.'
+      },
+      {
+        q: 'Как Google Таблицы используются в рейтинговой системе?',
+        options: [
+          'Для создания публичного лидерборда группы',
+          'Для написания эссе',
+          'Для видеосвязи',
+          'Для хранения фотографий'
+        ],
+        correct: 0,
+        explanation: 'Оценки из Google Classroom экспортируются в Google Таблицы одной кнопкой, где можно создать красивый лидерборд с автоматическим обновлением.'
+      }
+    ]
+  },
+
+  // Курс 2, Модуль 1 — Основы геймификации
+  'c2m1': {
+    title: 'Тест: Основы геймификации в образовании',
+    desc: 'Модуль 1 · 5 вопросов · 20 баллов',
+    courseId: 2,
+    questions: [
+      {
+        q: 'Какой из элементов НЕ относится к игровым механикам геймификации?',
+        options: ['Традиционный письменный экзамен', 'Баллы', 'Бейджи', 'Уровни'],
+        correct: 0,
+        explanation: 'Традиционный письменный экзамен — это классический инструмент оценки, не связанный с геймификацией. Игровые механики: баллы, бейджи, уровни, лидерборд.'
+      },
+      {
+        q: 'Какова главная цель геймификации в образовании?',
+        options: [
+          'Повысить мотивацию и вовлечённость студентов',
+          'Заменить все учебники играми',
+          'Упростить работу преподавателя',
+          'Сократить время обучения'
+        ],
+        correct: 0,
+        explanation: 'Главная цель — повысить внутреннюю мотивацию студентов через игровые механики, делая процесс обучения более увлекательным.'
+      },
+      {
+        q: 'Что такое "стрик" в контексте образовательной платформы?',
+        options: [
+          'Количество дней подряд активного обучения',
+          'Количество правильных ответов подряд',
+          'Серия побед в соревнованиях',
+          'Скорость прохождения модуля'
+        ],
+        correct: 0,
+        explanation: 'Стрик — это серия дней подряд, в которые студент заходил на платформу. Поддерживает привычку ежедневного обучения.'
+      },
+      {
+        q: 'Как называется система наград за достижения в учёбе?',
+        options: ['Бейджи (значки)', 'Дипломы', 'Грамоты', 'Сертификаты'],
+        correct: 0,
+        explanation: 'Бейджи (значки) — это цифровые награды за конкретные достижения: завершение курса, активность на форуме, высокие баллы.'
+      },
+      {
+        q: 'Какой принцип лежит в основе эффективной геймификации?',
+        options: [
+          'Немедленная обратная связь за действия',
+          'Максимально сложные задания',
+          'Отсутствие оценок',
+          'Только индивидуальная работа'
+        ],
+        correct: 0,
+        explanation: 'Немедленная обратная связь — ключевой принцип. Студент должен сразу видеть результат своих действий: получил балл, заработал бейдж, поднялся в рейтинге.'
+      }
+    ]
+  },
+
+  // Курс 3, Модуль 1 — Основы Python
+  'c3m1': {
+    title: 'Тест: Основы Python',
+    desc: 'Модуль 1 · 5 вопросов · 20 баллов',
+    courseId: 3,
+    questions: [
+      {
+        q: 'Какой символ используется для комментариев в Python?',
+        options: ['#', '//', '/*', '--'],
+        correct: 0,
+        explanation: 'В Python символ # используется для однострочных комментариев. Пример: # это комментарий'
+      },
+      {
+        q: 'Как объявить переменную в Python?',
+        options: ['name = "Алишер"', 'var name = "Алишер"', 'let name = "Алишер"', 'string name = "Алишер"'],
+        correct: 0,
+        explanation: 'В Python переменные объявляются без ключевых слов — просто name = значение. Тип определяется автоматически.'
+      },
+      {
+        q: 'Что выведет: print(2 ** 3)?',
+        options: ['8', '6', '23', 'Ошибку'],
+        correct: 0,
+        explanation: '** — оператор возведения в степень. 2 ** 3 = 2³ = 8.'
+      },
+      {
+        q: 'Какой тип данных возвращает функция input()?',
+        options: ['str (строка)', 'int (целое число)', 'float (дробное)', 'bool (булево)'],
+        correct: 0,
+        explanation: 'Функция input() всегда возвращает строку (str). Для работы с числами нужно преобразование: int(input()) или float(input()).'
+      },
+      {
+        q: 'Как правильно написать условие в Python?',
+        options: [
+          'if x > 0:\n    print("положительное")',
+          'if (x > 0) { print("положительное") }',
+          'if x > 0 then print("положительное")',
+          'if x > 0 => print("положительное")'
+        ],
+        correct: 0,
+        explanation: 'В Python условие записывается через if с двоеточием, а тело — через отступ (4 пробела или Tab). Фигурные скобки не используются.'
+      }
+    ]
+  }
+};
+
+// ══════════════════════════════════
+//   ЛОГИКА ТЕСТА
+// ══════════════════════════════════
+
+let currentQuiz   = null;
+let currentIndex  = 0;
+let score         = 0;
+let userAnswers   = [];
+const POINTS_PER  = 4; // баллов за правильный ответ
+
+function loadQuiz() {
+  const quizId   = getParam('quiz') || 'c1m1';
+  const courseId = getParam('course') || '1';
+
+  currentQuiz  = QUIZZES[quizId] || QUIZZES['c1m1'];
+  currentIndex = 0;
+  score        = 0;
+  userAnswers  = [];
+
+  document.getElementById('quizTitle').textContent    = currentQuiz.title;
+  document.getElementById('quizDesc').textContent     = currentQuiz.desc;
+  document.getElementById('quizBreadcrumb').textContent = currentQuiz.title;
+  document.getElementById('backLink').href            = `course.html?id=${currentQuiz.courseId}`;
+  document.getElementById('backToCourse').href        = `course.html?id=${currentQuiz.courseId}`;
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q    = currentQuiz.questions[currentIndex];
+  const total = currentQuiz.questions.length;
+  const pct  = (currentIndex / total) * 100;
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${currentIndex + 1} / ${total}`;
+  document.getElementById('questionNum').textContent  = `Вопрос ${currentIndex + 1}`;
+  document.getElementById('questionText').textContent = q.q;
+
+  const letters = ['А', 'Б', 'В', 'Г'];
+  document.getElementById('questionOptions').innerHTML = q.options.map((opt, i) => `
+    <button class="quiz-option" onclick="selectAnswer(${i})">
+      <div class="option-letter">${letters[i]}</div>
+      <span>${opt}</span>
+    </button>
+  `).join('');
+
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('btnNext').style.display      = 'none';
+  document.getElementById('quizCard').style.display     = 'block';
+  document.getElementById('quizResult').style.display   = 'none';
+}
+
+function selectAnswer(index) {
+  const q       = currentQuiz.questions[currentIndex];
+  const options = document.querySelectorAll('.quiz-option');
+  const feedback = document.getElementById('quizFeedback');
+  const btnNext  = document.getElementById('btnNext');
+  const isLast   = currentIndex === currentQuiz.questions.length - 1;
+  const isCorrect = index === q.correct;
+
+  // Блокируем все опции
+  options.forEach(o => o.classList.add('disabled'));
+
+  // Подсвечиваем выбранный и правильный
+  options[index].classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) options[q.correct].classList.add('correct');
+
+  // Записываем ответ
+  userAnswers.push({ question: q.q, chosen: q.options[index], correct: q.options[q.correct], isCorrect });
+
+  if (isCorrect) {
+    score += POINTS_PER;
+    feedback.className = 'quiz-feedback correct';
+    feedback.innerHTML = `✅ Правильно! ${q.explanation}`;
+  } else {
+    feedback.className = 'quiz-feedback wrong';
+    feedback.innerHTML = `❌ Неправильно. ${q.explanation}`;
+  }
+
+  feedback.style.display = 'block';
+  btnNext.style.display  = 'flex';
+  btnNext.textContent    = isLast ? 'Завершить тест 🏁' : 'Следующий вопрос →';
+  btnNext.style.justifyContent = 'center';
+}
+
+function nextQuestion() {
+  currentIndex++;
+  if (currentIndex < currentQuiz.questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  const total   = currentQuiz.questions.length;
+  const correct = userAnswers.filter(a => a.isCorrect).length;
+  const wrong   = total - correct;
+  const pct     = Math.round((correct / total) * 100);
+
+  document.getElementById('quizCard').style.display   = 'none';
+  document.getElementById('quizProgress').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+
+  // Эмодзи и надпись по результату
+  let emoji, label, sub;
+  if (pct === 100) {
+    emoji = '🏆'; label = 'Отлично! Идеальный результат!';
+    sub = 'Вы отлично знаете этот материал. Так держать!';
+  } else if (pct >= 80) {
+    emoji = '🎉'; label = 'Хороший результат!';
+    sub = 'Совсем немного до идеала. Повторите материал и попробуйте снова!';
+  } else if (pct >= 60) {
+    emoji = '📚'; label = 'Неплохо, но есть над чем поработать';
+    sub = 'Прочитайте лекцию ещё раз и повторите тест.';
+  } else {
+    emoji = '💪'; label = 'Нужно повторить материал';
+    sub = 'Вернитесь к лекции, изучите её внимательнее и попробуйте снова.';
+  }
+
+  document.getElementById('resultEmoji').textContent  = emoji;
+  document.getElementById('resultScore').textContent  = `${score} / ${total * POINTS_PER}`;
+  document.getElementById('resultScore').style.color  = pct >= 60 ? 'var(--success)' : 'var(--danger)';
+  document.getElementById('resultLabel').textContent  = label;
+  document.getElementById('resultSub').textContent    = sub;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('wrongCount').textContent   = wrong;
+  document.getElementById('pointsEarned').textContent = `+${score}`;
+
+  // Разбор ответов
+  document.getElementById('resultAnswers').innerHTML =
+    '<div style="font-size:0.82rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8rem;">Разбор ответов</div>' +
+    userAnswers.map(a => `
+      <div class="answer-row">
+        <div class="answer-icon">${a.isCorrect ? '✅' : '❌'}</div>
+        <div class="answer-text">
+          <div style="font-weight:700;margin-bottom:0.2rem;">${a.question}</div>
+          <div>Ваш ответ: <strong>${a.chosen}</strong></div>
+          ${!a.isCorrect ? `<div class="answer-correct">Правильно: ${a.correct}</div>` : ''}
+        </div>
+      </div>`).join('');
+
+  // Сохраняем результат в бэкенд
+  apiPost('/tests/submit', {
+    module_id: 1,
+    score:     score,
+    max_score: total * POINTS_PER
+  });
+}
+
+function restartQuiz() {
+  document.getElementById('quizProgress').style.display = 'flex';
+  loadQuiz();
+}
+
+loadQuiz();
+</script>
+</body>
+</html>
